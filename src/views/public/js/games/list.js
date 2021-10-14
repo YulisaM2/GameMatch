@@ -1,7 +1,7 @@
-function gameHTML({type, id, name, img}) {
+function gameHTML({image, name}) {
     return `
         <div class="game">
-            <img src="${img}" alt="${name} poster">
+            <img src="${image}" alt="${name} poster">
             <h2>${name}</h2>
         </div>
     `
