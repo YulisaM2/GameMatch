@@ -22,12 +22,3 @@ gamesController.get()
 
         gamesDiv.innerHTML = gamesHTML
     })
-
-
-
-// gamesObj.forEach(game => {
-//     gamesHTML += gameHTML(game)
-// });
-
-// const gamesDiv = document.getElementById("games")
-// gamesDiv.innerHTML = gamesHTML
