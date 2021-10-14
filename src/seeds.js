@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const Comment = require('./models/comment')
 const Game = require('./models/game')
 const Post = require('./models/post')
-const Tag = require('./models/Tag')
+const Tag = require('./models/tag')
+const User = require('./models/user')
 
 var dummy_games = [
     {
@@ -52,6 +53,22 @@ var dummy_tags = [
     }
 ];
 
+var dummy_users = [
+    {
+        username: "n00b",
+        password: "1234",
+        isAdmin: true,
+        name: "Guillermo Meraz",
+        email: "fake@fake.com"
+    },
+    {
+        username: "fakefan",
+        password: "lol",
+        name: "Osorio de la Cruz",
+        email: "osoriodelacruz@fake.com"
+    }
+];
+
 function emtpyDB() {
     Game.deleteMany({}, function(err){
         if(err){
@@ -83,6 +100,14 @@ function emtpyDB() {
             console.log("------ Posts removed ------");
         }
     });
+
+    User.deleteMany({}, function(err){
+        if(err){
+            console.log(err);
+        }else{
+            console.log("------ Users removed ------");
+        }
+    });
   
     return new Promise(resolve => {
         setTimeout(() => {
@@ -90,6 +115,14 @@ function emtpyDB() {
         }, 500);
       });
 };
+
+function syncThreads(){
+    return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('resolved');
+        }, 50);
+      });
+}
 
 async function seedDB(){
     const result = await emtpyDB();
@@ -104,19 +137,8 @@ async function seedDB(){
         });
     });
 
-
-//     dummy_tags.forEach(function(seed){
-//         Tag.create(seed, function(err){
-//             if(err){
-//                 console.log(err);
-//             }else{
-//                 console.log("Added new tag.");
-//             }
-//         });
-//     });
-// }
-
-    var currTag = 0
+    var currTag = 0;
+    var currUser = 0;
     dummy_posts.forEach(function(seed){
         Post.create(seed, function(err, post){
             if(err){
@@ -130,17 +152,30 @@ async function seedDB(){
                         console.log(err);
                     }else{
                         post.comments.push(comment);
-                        // post.save();
                         console.log("Added new comment.");
                         Tag.create(dummy_tags[currTag], function(err, tag){
                             if(err){
                                 console.log(err);
                             }else{
                                 post.tags.push(tag);
-                                post.save();
+                                // post.save();
                                 console.log("Added new tag.");
                                 currTag+= 1;
-                                // console.log(currTag);
+                                User.create(dummy_users[currUser], function(err, user){
+                                    // console.log(currUser);
+                                    // console.log(dummy_users[currUser]);
+                                    // console.log(user);
+                                    if(err){
+                                       console.log(err);
+                                    }else{
+                                        currUser+= 1;
+                                        post.author.id = user._id;
+                                        post.author.username = user.username;
+                                        post.author.name = user.name
+                                        post.save();
+                                        console.log("Added new user.");    
+                                    }
+                                });
                             }
                         });
                     }
