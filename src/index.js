@@ -1,6 +1,6 @@
 const express = require('express')
 const home = require('./controllers/home')
-const game = require('./controllers/game')
+const games = require('./controllers/games')
 const api  = require('./controllers/api/api')
 const mongoose = require('mongoose')
 const seedDB = require("./seeds")
@@ -10,7 +10,7 @@ const port = 5000
 
 app.use('/', home)
 app.use('/api', api)
-app.use('/games', game)
+app.use('/games', games)
 app.use(express.static('src/views/public'))
 
 app.listen(port, () => {

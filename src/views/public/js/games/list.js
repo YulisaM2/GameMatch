@@ -10,8 +10,6 @@ function gameHTML({type, id, name, img}) {
 const gamesController = new Games()
 gamesController.get()
     .then(games => {
-        console.log(games.data)
-
         let gamesHTML = ""
 
         games.data.forEach(game => {
@@ -22,12 +20,3 @@ gamesController.get()
 
         gamesDiv.innerHTML = gamesHTML
     })
-
-
-
-// gamesObj.forEach(game => {
-//     gamesHTML += gameHTML(game)
-// });
-
-// const gamesDiv = document.getElementById("games")
-// gamesDiv.innerHTML = gamesHTML
