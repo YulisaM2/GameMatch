@@ -1,9 +1,11 @@
-const express = require('express')
-const home = require('./controllers/home')
-const games = require('./controllers/games')
-const api  = require('./controllers/api/api')
+const express  = require('express')
 const mongoose = require('mongoose')
-const seedDB = require("./seeds")
+
+const home     = require('./controllers/home')
+const games    = require('./controllers/games')
+const api      = require('./controllers/api/api')
+
+const seedDB   = require("./seeds")
 
 const app = express()
 const port = 5000

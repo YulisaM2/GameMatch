@@ -1,8 +1,8 @@
-function gameHTML({image, name}) {
+function gameHTML({image, name, _id}) {
     return `
         <div class="game">
             <img src="${image}" alt="${name} poster">
-            <h2>${name}</h2>
+            <h2><a href="/games/${_id}/posts">${name}</a></h2>
         </div>
     `
 }
