@@ -10,6 +10,9 @@ const seedDB   = require("./seeds")
 const app = express()
 const port = 5000
 
+app.set('views', process.cwd() + '/src/views')
+app.set('view engine', 'ejs')
+
 app.use('/', home)
 app.use('/api', api)
 app.use('/games', games)
