@@ -14,7 +14,7 @@
         <% games.forEach(game => { %>
             <div class="game">
                 <img src="<%= game.image %>" alt="<%= game.name %> poster">
-                <h2><a href="/games/<%= game._id %>/posts"><%= game.name %></a></h2>
+                <h2><a href="/games/<%= game._id %>"><%= game.name %></a></h2>
             </div>
         <% }); %>
     </div>

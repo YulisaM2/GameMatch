@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 var post_Schema = new mongoose.Schema({
     title: String, 
     description: String,
+    game: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Game",
+    },
     tags: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tag"
