@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: 0;
+}
+
+body {
+    margin-top: 45px;
+    background: #010f34;
+}
+
+.container {
+    border-color: #010f34;
+}
+
+.row {
+    background: white;
+    border-radius: 31px;
+    box-shadow: 12px 12px 18px black;
+}
+
+.lbTitle {
+    color: #010f34;
+}
+
+.loginImg {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: #010f34;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn1:hover {
+    background: white;
+    border: 1px solid;
+    color: #010f34;
+}
