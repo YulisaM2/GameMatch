@@ -1,10 +1,8 @@
 var express = require('express')
-const path = require('path')
 
 const PostsController = require('./posts')
 const GameModel = require('../models/game')
 const PostModel = require('../models/post')
-const TagModel = require('../models/tag')
 
 var router = express.Router()
 

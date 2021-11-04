@@ -1,10 +1,10 @@
-var express = require('express')
-const path = require('path')
+var express = require('express');
+
+const CommentsController = require('./comments')
 
 const PostModel = require('../models/post');
-const CommentModel = require('../models/comment');
 
-var router = express.Router({ mergeParams: true })
+var router = express.Router({ mergeParams: true });
 
 router.get('/:postID', async (req, res) => {
     let post = await PostModel.findOne({_id: req.params.postID});
@@ -21,4 +21,6 @@ router.post('/', async function (req, res) {
     res.render('posts/single', {post})
 });
 
-module.exports = router
+router.use('/:postID/comments/', CommentsController);
+
+module.exports = router;
