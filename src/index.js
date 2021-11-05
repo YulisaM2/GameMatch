@@ -5,6 +5,7 @@ const methodOverride = require('method-override')
 const home     = require('./controllers/home')
 const games    = require('./controllers/games')
 const api      = require('./controllers/api/api')
+const admin    = require('./controllers/admin/admin')
 
 const seedDB   = require("./seeds")
 
@@ -20,6 +21,7 @@ app.use(methodOverride('_method'))
 app.use('/', home)
 app.use('/api', api)
 app.use('/games', games)
+app.use('/admin', admin)
 app.use(express.static('src/views/public'))
 
 mongoose.connect("mongodb://localhost/gameMatch", {
