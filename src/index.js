@@ -22,22 +22,21 @@ app.use('/api', api)
 app.use('/games', games)
 app.use(express.static('src/views/public'))
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
-
 mongoose.connect("mongodb://localhost/gameMatch", {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
 })
-    .then(() => 
-            console.log('DB Connected.')
-    )
-    .catch(err => {
+  .then(async () => {
+    console.log('DB Connected.');
+
+    // Seeding db for local testing
+    await seedDB();
+
+    app.listen(port, () => {
+      console.log(`GameMatch server listening at http://localhost:${port}`)
+    });
+  })
+  .catch(err => {
     console.log(`DB Connection Error: ${err.message}`);
-});
-
-// Seeding db for local testing
-seedDB();
-
-
+    process.exit(1);
+  });
