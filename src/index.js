@@ -1,5 +1,6 @@
 const express  = require('express')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 
 const home     = require('./controllers/home')
 const games    = require('./controllers/games')
@@ -14,6 +15,7 @@ app.set('views', process.cwd() + '/src/views')
 app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 app.use('/', home)
 app.use('/api', api)
