@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% games.forEach(game => { %>
+                <% games.forEach((game, gameIndex) => { %>
                     <tr>
                         <form action="/admin/games?_method=PUT" method="POST">
                             <input type="hidden" name="_id" value="<%= game._id %>">
@@ -33,8 +33,9 @@
                                 <input type="text" name="image" value="<%= game.image %>" class="form-control">
                             </td>
                             <td>
-                                <% game.tags.forEach(tag => { %>
-                                    <span class="badge badge-primary"><%= tag.name %></span>
+                                <% game.tags.forEach((tag, tagIndex) => { %>
+                                    <input id="tag-hidden-input-<%= gameIndex %>-<%= tagIndex %>" type="hidden" name="tags[]" value="<%= tag._id %>">
+                                    <span id="tag-<%= gameIndex %>-<%= tagIndex %>" class="badge badge-primary"><%= tag.name %> <button id="tag-delete-<%= gameIndex %>-<%= tagIndex %>" class="btn badge badge-danger">X</button></span>
                                 <% }); %>
                             </td>
                             <td>
@@ -67,5 +68,17 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        <% games.forEach((game, gameIndex) => { %>
+            <% game.tags.forEach((tag, tagIndex) => { %>
+                document.getElementById(`tag-delete-<%= gameIndex %>-<%= tagIndex %>`).onclick = event => {
+                    event.preventDefault();
+                    document.getElementById(`tag-<%= gameIndex %>-<%= tagIndex %>`).remove();
+                    document.getElementById(`tag-hidden-input-<%= gameIndex %>-<%= tagIndex %>`).remove();
+                };
+            <% }); %>
+        <% }); %>
+    </script>
 </body>
 </html>

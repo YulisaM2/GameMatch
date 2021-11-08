@@ -30,8 +30,7 @@ router.put('/games', async function (req, res) {
 
     game.name = req.body.name;
     game.image = req.body.image;
-
-    // TODO: Make it possible to update tags.
+    game.tags = req.body.tags;
 
     game = await game.save();
     
