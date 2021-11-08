@@ -1,9 +1,18 @@
+require('dotenv').config()
+
 const express  = require('express')
+const session = require('express-session')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
+const passport = require('passport')
+const localStrategy = require('passport-local')
+
+const User = require('./models/user')
 
 const home     = require('./controllers/home')
 const games    = require('./controllers/games')
 const api      = require('./controllers/api/api')
+const auth     = require('./controllers/auth')
 
 const seedDB   = require("./seeds")
 
@@ -15,10 +24,31 @@ app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({ extended: true }))
 
+const sessionConfig = {
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+      httpOnly: true,
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}
+app.use(session(sessionConfig))
+
 app.use('/', home)
 app.use('/api', api)
 app.use('/games', games)
+app.use('/', auth)
 app.use(express.static('src/views/public'))
+app.use(methodOverride('_method'))
+
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new localStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
@@ -36,6 +66,6 @@ mongoose.connect("mongodb://localhost/gameMatch", {
 });
 
 // Seeding db for local testing
-seedDB();
+// seedDB();
 
 
