@@ -19,10 +19,10 @@ var user_Schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    name: {
-        type: String,
-        required: true
-    }, 
+    // name: {
+    //     type: String,
+    //     required: true
+    // }, 
     email: {
         type: String,
         required: true,

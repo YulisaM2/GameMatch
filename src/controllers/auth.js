@@ -15,7 +15,22 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', async(req, res) => {
-    res.send(req.body)
+    try{
+        const {user} = req.body
+        if(user.password != user.confirm_password){
+            console.log("The passwords do not match.")
+            res.redirect('/register')
+        }else{
+            const user_buffer = new User({email: user.email, username: user.username})
+            const new_user = await User.register(user_buffer, user.password)
+            console.log(new_user)
+        }
+    }catch(e){
+        console.log("Error: "+ e.message);
+        res.redirect('/register')
+    }
+
+    
 })
 
 router.get('/login', (req, res) => {
