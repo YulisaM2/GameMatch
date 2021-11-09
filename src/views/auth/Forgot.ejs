@@ -10,7 +10,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Forgot your password?</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -18,25 +18,25 @@
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-lg-5">
-                    <img src="./loginImage.jpg" class="loginImg img-fluid" alt="Image of two videogame controllers.">
+                    <img src="./css/loginImage.jpg" class="loginImg img-fluid" alt="Image of two videogame controllers.">
                 </div>
                 <div class="col-lg-7 px-5 pt-5">
                     <h1 class="lbTitle font-weight-bold py-3">GameMatch</h1>
                     <h4>Forgot your password?</h4>
-                    <form>
+                    <form action='/forgot' method='POST'>
                         <div class="form-row">
                             <p class="col-lg-10 my-1">That's okay, it happens! Enter your email address and we will
                                 help you reset it.</p>
                             <div class="col-lg-7">
-                                <input type="email" placeholder="Email" class="form-control mt-4 mb-2 p-4">
+                                <input type="email" placeholder="Email" class="form-control mt-4 mb-2 p-4" name="email" required>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-7">
-                                <button type="button" class="btn1 mt-2 mb-5">Send email</button>
+                            <div class="form-group col-lg-7">
+                                <button class="btn1 mt-3 mb-5">Send email</button>
                             </div>
                         </div>
-                        <p>Want to try again? <a href="./Register.ejs">Go back to the login page.</a></p>
+                        <p>Want to try again? <a href="/login">Go back to the login page.</a></p>
                     </form>
                 </div>
             </div>

@@ -5,12 +5,13 @@
 }
 
 body {
-    margin-top: 45px;
+    margin: 0;
     background: #010f34;
 }
 
 .container {
     border-color: #010f34;
+    margin-top: 50px;
 }
 
 .row {
@@ -40,7 +41,33 @@ body {
 }
 
 .btn1:hover {
-    background: white;
+    background: #042383;
     border: 1px solid;
+    color: white;
+}
+
+.col-cont {
+    margin: auto;
+}
+
+.post-input {
+    font-weight: bold;
     color: #010f34;
+}
+
+.form-control {
+    border-color: rgb(155, 154, 154);
+}
+
+.navbar-custom {
+    background-color: #042383;
+    box-shadow: 1px 6px 3px -1px rgba(0,0,0,0.35);
+}
+
+.navbar-brand, .nav-link {
+    color: white;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: rgb(189, 197, 243);
 }
