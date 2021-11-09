@@ -2,8 +2,6 @@ var express = require('express')
 const path = require('path')
 const User = require('../models/user')
 const passport = require('passport')
-const { isLoggedIn } = require('../middleware')
-
 
 var router = express.Router()
 
@@ -38,8 +36,6 @@ router.post('/register', async(req, res) => {
         console.log("Error: "+ e.message);
         res.redirect('/register')
     }
-
-    
 })
 
 router.get('/login', (req, res) => {
