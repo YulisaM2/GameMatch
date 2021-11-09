@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Games | GameMatch</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <h1>Manage Games</h1>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Tags</th>
+                    <th>Save</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% games.forEach(game => { %>
+                    <tr>
+                        <form action="/admin/games?_method=PUT" method="POST">
+                            <input type="hidden" name="_id" value="<%= game._id %>">
+                            <td>
+                                <input type="text" name="name" value="<%= game.name %>" class="form-control">
+                            </td>
+                            <td>
+                                <img src="<%= game.image %>" alt="<%= game.name %> poster" class="ratio" style="--bs-aspect-ratio: 178%; max-width: 50px;">
+                                <input type="text" name="image" value="<%= game.image %>" class="form-control">
+                            </td>
+                            <td>
+                                <% game.tags.forEach(tag => { %>
+                                    <span class="badge badge-primary"><%= tag.name %></span>
+                                <% }); %>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </td>
+                        </form>
+                    </tr>
+                <% }); %>
+                <tr>
+                    <form action="/admin/games" method="POST">
+                        <td>
+                            <input type="text" name="name" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="image" class="form-control">
+                        </td>
+                        <td>
+                            <select name="tags[]" class="custom-select">
+                                <option selected>Add a tag</option>
+                                <% tags.forEach(tag => { %>
+                                    <option value="<%= tag._id %>"><%= tag.name %></option>
+                                <% }); %>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
