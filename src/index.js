@@ -42,6 +42,11 @@ passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
+app.use((req, res, next) => {
+  res.locals.current_user = req.user;
+  next();
+})
+
 app.use('/', home)
 app.use('/api', api)
 app.use('/games', games)

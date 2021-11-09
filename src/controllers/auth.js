@@ -20,7 +20,14 @@ router.post('/register', async(req, res) => {
         }else{
             const user_buffer = new User({email: user.email, username: user.username})
             const new_user = await User.register(user_buffer, user.password)
-            console.log(new_user)
+            req.login(new_user, e => {
+                if(e){
+                    console.log(e)
+                }else{
+                    console.log(new_user)
+                }
+            })
+            
             res.redirect('/')
         }
     }catch(e){
