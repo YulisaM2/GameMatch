@@ -11,13 +11,17 @@ body {
 
 .container {
     border-color: #010f34;
-    margin-top: 50px;
+    margin-top: 2px;
 }
 
 .row {
     background: white;
     border-radius: 31px;
     box-shadow: 12px 12px 18px black;
+}
+
+.row1 {
+    background: white;
 }
 
 .lbTitle {
