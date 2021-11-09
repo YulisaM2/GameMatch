@@ -8,6 +8,10 @@ const { isLoggedIn } = require('../middleware')
 var router = express.Router()
 
 router.get('/register', (req, res) => {
+    if(req.isAuthenticated()){
+        console.log('To register a new account, log out first')
+        return res.redirect('/')
+    }
     res.render('./auth/Register')
 })
 
@@ -39,6 +43,10 @@ router.post('/register', async(req, res) => {
 })
 
 router.get('/login', (req, res) => {
+    if(req.isAuthenticated()){
+        console.log('You are already logged in, if you want to log in with a new account first log out')
+        return res.redirect('/')
+    }
     res.render('./auth/Login')
 })
 
