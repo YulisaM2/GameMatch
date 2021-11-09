@@ -23,15 +23,18 @@
                 <div class="col-lg-7 px-5 pt-5">
                     <h1 class="lbTitle font-weight-bold py-3">GameMatch</h1>
                     <h4>Sign into your account</h4>
-                    <form>
+                    <form action='/login' method='POST'>
                         <div class="form-row">
-                            <div class="col-lg-7">
+                            <!-- <div class="col-lg-7">
                                 <input type="email" placeholder="Email" class="form-control mt-4 mb-3 p-4" name="user[email]" required>
+                            </div> -->
+                            <div class="col-lg-7">
+                                <input type="user" placeholder="Username" class="form-control mt-4 mb-3 p-4" name="username" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-7">
-                                <input type="password" placeholder="Password" class="form-control my-2 p-4" name="user[password]" required>
+                                <input type="password" placeholder="Password" class="form-control my-2 p-4" name="password" required>
                             </div>
                         </div>
                         <div class="form-row">

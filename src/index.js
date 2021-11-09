@@ -5,7 +5,7 @@ const session = require('express-session')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const passport = require('passport')
-const localStrategy = require('passport-local')
+const LocalStrategy = require('passport-local')
 
 const User = require('./models/user')
 
@@ -36,18 +36,18 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 app.use('/', home)
 app.use('/api', api)
 app.use('/games', games)
 app.use('/', auth)
 app.use(express.static('src/views/public'))
 app.use(methodOverride('_method'))
-
-app.use(passport.initialize())
-app.use(passport.session())
-passport.use(new localStrategy(User.authenticate()))
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
 
 
 app.listen(port, () => {

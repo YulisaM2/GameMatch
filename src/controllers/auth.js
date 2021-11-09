@@ -1,6 +1,7 @@
 var express = require('express')
 const path = require('path')
 const User = require('../models/user')
+const passport = require('passport')
 
 var router = express.Router()
 
@@ -24,6 +25,7 @@ router.post('/register', async(req, res) => {
             const user_buffer = new User({email: user.email, username: user.username})
             const new_user = await User.register(user_buffer, user.password)
             console.log(new_user)
+            res.redirect('/')
         }
     }catch(e){
         console.log("Error: "+ e.message);
@@ -37,8 +39,9 @@ router.get('/login', (req, res) => {
     res.render('./auth/Login')
 })
 
-router.post('/login', async(req, res) => {
-    res.send(req.body)
+router.post('/login', passport.authenticate('local', { failureFlash: false, failureRedirect: '/login' }), (req, res) => {
+    console.log("Logged in")
+    res.redirect('/')
 })
 
 router.get('/forgot', (req, res) => {
