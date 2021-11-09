@@ -62,6 +62,9 @@ router.get('/logout', (req, res) => {
 
 
 router.get('/forgot', (req, res) => {
+    if(req.isAuthenticated()){
+        return res.redirect('/')
+    }
     res.render('./auth/Forgot')
 })
 
