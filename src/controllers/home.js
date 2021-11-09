@@ -1,5 +1,6 @@
 var express = require('express')
 const path = require('path')
+// const { isLoggedIn } = require('../middleware')
 
 var router = express.Router()
 
@@ -9,5 +10,6 @@ router.get('/', function (req, res) {
     }
     res.sendFile('home.html', options)
 })
+
 
 module.exports = router
