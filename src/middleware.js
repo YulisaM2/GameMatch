@@ -36,3 +36,15 @@ module.exports.isCommentAuthorOrAdmin = async(req, res, next) => {
     }
     next()
 }
+
+module.exports.isAdmin = async (req, res, next) => {
+    if (req.user === undefined) {
+        return res.redirect('/login');
+    }
+
+    if (!req.user.isAdmin) {
+        return res.redirect('/');
+    }
+
+    next();
+}

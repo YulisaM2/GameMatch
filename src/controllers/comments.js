@@ -1,12 +1,15 @@
 var express = require('express')
 
+const { isLoggedIn } = require('../middleware');
+
 const CommentModel = require('../models/comment');
 const PostModel = require('../models/post')
 
 var router = express.Router({ mergeParams: true })
 
-router.post('/', async function (req, res) {
+router.post('/', isLoggedIn, async function (req, res) {
     let comment = new CommentModel(req.body);
+    comment.author = req.user._id;
     comment = await comment.save();
 
     const post = await PostModel.findOne({_id: req.params.postID});

@@ -12,12 +12,25 @@
     <div class="container">
         <div id="post" class="bg-primary text-white p-5">
             <h1><%= post.title %></h1>
+            <small><%= post.author.username %></small>
             <p><%= post.description %></p>
         </div>
+        <% if (user !== undefined) { %>
+            <div id="new-comment" class="border rounded p-3 mt-3 mb-3 bg-white shadow-sm">
+                <form action="/games/<%= post.game._id %>/posts/<%= post._id %>/comments" method="POST">
+                    <div class="form-group">
+                        <label for="text" class="form-label">Comment</label>
+                        <textarea name="text" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        <% } %>
         <div id="comments" class="mt-2">
             <% if (post.comments.length != 0) { %>
                 <% post.comments.forEach(comment => { %>
                     <div class="card shadow-sm bg-white p-3 mb-3">
+                        <small><%= comment.author.username %></small>
                         <p><%= comment.text %></p>
                     </div>
                 <% }); %>
@@ -26,15 +39,6 @@
                     <p class="text-center mb-0">No comments yet.</p>
                 </div>
             <% } %>
-        </div>
-        <div id="new-comment" class="border rounded p-3 mb-3 bg-white shadow-sm">
-            <form action="/games/<%= post.game._id %>/posts/<%= post._id %>/comments" method="POST">
-                <div class="form-group">
-                    <label for="text" class="form-label">Comment</label>
-                    <textarea name="text" class="form-control" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
         </div>
     </div>
 </body>

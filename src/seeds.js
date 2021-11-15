@@ -12,24 +12,28 @@ const dummy_games = [
         name: "League of Legends",
         image: "https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-285x380.jpg",
         tags: [0, 3, 4],
+        deleted: false,
     }, 
     {
         seedID: 1,
         name: "Call of Duty: Warzone",
         image: "https://static-cdn.jtvnw.net/ttv-boxart/Call%20of%20Duty:%20Warzone-285x380.jpg",
         tags: [1],
+        deleted: false,
     },
     {
         seedID: 2,
         name: "Valorant",
         image: "https://static-cdn.jtvnw.net/ttv-boxart/VALORANT-285x380.jpg",
         tags: [2, 3, 4],
+        deleted: false,
     },
     {
         seedID: 3,
         name: "Battlefield: 2042",
         image: "https://static-cdn.jtvnw.net/ttv-boxart/Battlefield%202042-285x380.jpg",
         tags: [4],
+        deleted: false,
     },
 ];
 
@@ -41,6 +45,7 @@ const dummy_posts = [
         game: 0,
         tags: [0],
         comments: [0],
+        author: 0,
     },
     {
         seedID: 1,
@@ -49,6 +54,7 @@ const dummy_posts = [
         game: 0,
         tags: [3, 4],
         comments: [],
+        author: 1,
     },
     {
         seedID: 2,
@@ -57,6 +63,7 @@ const dummy_posts = [
         game: 1,
         tags: [],
         comments: [],
+        author: 0,
     }
 ];
 
@@ -105,11 +112,7 @@ const dummy_comments = [
     {
         seedID: 0,
         text: "I'd like to join.",
-        author: {
-            id: 1,
-            username: "fakefan",
-            name: "Guillermo Meraz",
-        },
+        author: 1,
         createdAt: Date.now(),
     },
 ]
@@ -172,7 +175,7 @@ const seedGames = async tags => {
     return gameMap;
 }
 
-const seedPosts = async (games, tags, comments) => {
+const seedPosts = async (games, tags, comments, users) => {
     for (let i = 0; i < dummy_posts.length; i++) {
         // change game id
         dummy_posts[i].game = games[dummy_posts[i].game]._id;
@@ -192,6 +195,9 @@ const seedPosts = async (games, tags, comments) => {
         for (const commentSeedID of commentsSeedIDs) {
             dummy_posts[i].comments.push(comments[commentSeedID]._id);
         }
+
+        // change user id
+        dummy_posts[i].author = users[dummy_posts[i].author]._id
     }
 
     const posts = await Post.create(dummy_posts);
@@ -208,7 +214,7 @@ const seedPosts = async (games, tags, comments) => {
 const seedComments = async users => {
     for (let i = 0; i < dummy_comments.length; i++) {
         // change user id
-        dummy_comments[i].author.id = users[dummy_comments[i].author.id]._id;
+        dummy_comments[i].author = users[dummy_comments[i].author]._id;
     }
 
     const comments = await Comment.create(dummy_comments);
@@ -238,7 +244,7 @@ const seedDB = async () => {
         const comments = await seedComments(users);
         console.log('Added comments.');
 
-        const posts = await seedPosts(games, tags, comments);
+        const posts = await seedPosts(games, tags, comments, users);
         console.log('Added posts.');
     } catch (err) {
         console.log(err);

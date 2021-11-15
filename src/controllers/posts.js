@@ -1,5 +1,8 @@
 var express = require('express');
 
+const { isLoggedIn } = require('../middleware');
+const { handle } = require('./util/util');
+
 const CommentsController = require('./comments')
 
 const PostModel = require('../models/post');
@@ -7,18 +10,32 @@ const PostModel = require('../models/post');
 var router = express.Router({ mergeParams: true });
 
 router.get('/:postID', async (req, res) => {
-    let post = await PostModel.findOne({_id: req.params.postID});
-    post = await post.populate(['game', 'tags', 'comments']);
+    let [post, error] = await handle(PostModel.findOne({_id: req.params.postID}).populate(['game', 'tags', 'author']).populate({path: 'comments', populate: {path: 'author'}}).exec());
 
-    res.render('posts/single', {post})
+    if (error || post === null) {
+        res.render('not-found');
+
+        return;
+    }
+
+    res.render('posts/single', {post, user: req.user});
 });
 
-router.post('/', async function (req, res) {
+router.post('/', isLoggedIn, async function (req, res) {
     const post = new PostModel(req.body);
-    post.game = req.params.gameID;
-    await post.save();
 
-    res.render('posts/single', {post})
+    post.game = req.params.gameID;
+    post.author = req.user._id;
+
+    const [newPost, error] = await handle(post.save());
+
+    if (error) {
+        res.redirect(`/games/${ req.params.gameID }`);
+
+        return;
+    }
+
+    res.redirect(`/games/${req.params.gameID}/posts/${newPost._id}`);
 });
 
 router.use('/:postID/comments/', CommentsController);
