@@ -26,17 +26,17 @@ body {
     border-radius: 5px;
 }
 
-/* .card1 {
+.card1 {
     background-color: rgb(9, 9, 10);
     background-color: rgb(18, 18, 19);
     outline: 1px solid rgb(37, 37, 39);
     border-radius: 5px;
-} */
+}
 
-.card1 {
+/* .card1 {
     background-color: rgb(9, 9, 10);
     border-radius: 5px;
-}
+} */
 
 hr {
     background-color: rgb(56, 56, 58);
