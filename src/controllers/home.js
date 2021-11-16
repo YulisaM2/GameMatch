@@ -7,10 +7,7 @@ router.get('/', function (req, res) {
     if(!req.isAuthenticated()){
         res.send("INSERT LANDING PAGE")
     }else{
-        const options = {
-            root: path.join(__dirname, '../views/home'),
-        }
-        res.sendFile('home.html', options)
+        res.redirect('/games')
     }
 })
 
