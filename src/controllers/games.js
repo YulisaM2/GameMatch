@@ -13,7 +13,7 @@ router.get('/', async function (req, res) {
     const [games, gamesError] = await handle(GameModel.find({ deleted: false }));
 
     if (gamesError || games === []) {
-        res.render('not-found');
+        res.status(404).render('not-found');
 
         return;
     }
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
     const [game, gameError] = await handle(GameModel.findOne({ _id: req.params.id, deleted: false }).populate('tags').exec());
 
     if (gameError || game === null) {
-        res.render('not-found');
+        res.status(404).render('not-found');
 
         return;
     }
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
     const [posts, postsError] = await handle(PostModel.find({ game: req.params.id }).populate('author').sort({ createdAt: 'desc' }).exec());
 
     if (postsError || posts === null) {
-        res.render('not-found');
+        res.status(404).render('not-found');
 
         return;
     }

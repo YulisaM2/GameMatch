@@ -13,7 +13,7 @@ router.get('/:postID', async (req, res) => {
     let [post, error] = await handle(PostModel.findOne({_id: req.params.postID}).populate(['game', 'tags', 'author']).populate({path: 'comments', populate: {path: 'author'}}).exec());
 
     if (error || post === null) {
-        res.render('not-found');
+        res.status(404).render('not-found');
 
         return;
     }
@@ -30,9 +30,9 @@ router.post('/', isLoggedIn, async function (req, res) {
     const [newPost, error] = await handle(post.save());
 
     if (error) {
-        res.redirect(`/games/${ req.params.gameID }`);
+        console.log(error);
 
-        return;
+        return res.status(400).render('bad-request');
     }
 
     res.redirect(`/games/${req.params.gameID}/posts/${newPost._id}`);
