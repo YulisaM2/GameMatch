@@ -1,0 +1,34 @@
+{
+  "name": "gamematch",
+  "version": "1.0.0",
+  "description": "_Picture Tinder but for gamers._ \\ There are a lot of collaborative or versus video games out there, but now with the pandemic, meeting new people to organize your own team might be harder. The idea is that users can search the game they want to play and then see other people’s profiles with information such as tag, badges, role, gameplay style and more. If the user thinks one of the candidates could be helpful to their team/campaign, they can send a message to notify the other person of their interest.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YulisaM2/GameMatch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YulisaM2/GameMatch/issues"
+  },
+  "homepage": "https://github.com/YulisaM2/GameMatch#readme",
+  "dependencies": {
+    "async": "^3.2.2",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-session": "^1.17.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.0.12",
+    "nodemailer": "^6.7.0",
+    "passport": "^0.5.0",
+    "passport-local-mongoose": "^6.1.0"
+  }
+}

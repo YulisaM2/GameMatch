@@ -1,0 +1,27 @@
+.games {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+.game {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1 0 10%;
+    background-color: gainsboro;
+    padding: 10px;
+    max-width: 250px;
+    box-sizing: border-box;
+}
+
+.game:hover {
+    opacity: 0.5;
+}
+
+.game > h2 {
+    text-align: center;
+    font-size: 18px;
+    line-height: 18px;
+}

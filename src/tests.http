@@ -1,0 +1,15 @@
+POST http://localhost:5000/games/6192c55dc3902c8047cc7529/posts
+Content-Type: application/x-www-form-urlencoded
+
+title=que onda
+&description=descripción
+&tags[]=1
+&tags[]=2
+
+###
+
+POST http://localhost:5000/login?username=santidiazg&password=12345
+
+###
+
+GET http://localhost:5000/games
