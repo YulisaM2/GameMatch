@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
+const mongoSanitize = require('express-mongo-sanitize')
 
 const User = require('./models/user')
 
@@ -25,6 +26,7 @@ app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(mongoSanitize())
 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
@@ -45,6 +47,7 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
+  // console.log(req.query);
   res.locals.current_user = req.user;
   next();
 })
@@ -66,7 +69,7 @@ mongoose.connect("mongodb://localhost/gameMatch", {
     console.log('DB Connected.');
 
     // Seeding db for local testing
-    // await seedDB();
+    //await seedDB();
 
     app.listen(port, () => {
       console.log(`GameMatch server listening at http://localhost:${port}`)

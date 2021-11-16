@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,44 +8,48 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
-<body class="bg-light">
+<body class="bg-light"> -->
+<%- include('../partials/Header') %>
+
     <div class="container">
-        <div class="mr-auto" style="max-width: 200px;">
-            <img src="<%= game.image %>" alt="<%= game.name %> poster" class="mw-100">
-            <h1 class="h6"><%= game.name %></h1>
-        </div>
-        <% if (user !== undefined) { %>
-            <div id="new-post" class="border rounded p-3 mb-3 bg-white shadow-sm">
-                <form action="/games/<%= game._id %>/posts" method="POST">
-                    <div class="form-group">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" class="form-control" required>
+        <div class="gameInfo my-5 text-center text-light">
+            <div class="d-flex">
+                <img src="<%= game.image %>" alt="<%= game.name %> poster" class="gameImg mw-100 ml-auto">
+                <div class="mr-auto ml-4 align-self-end text-left">
+                    <span class="h1"><%= game.name %></span>
+                    <div class="text-left mt-2 mb-4">
+                        <span>Tags: </span>
+                        <% game.tags.forEach(tag => { %>
+                            <span class="tag py-1 px-2 mr-1"><%= tag.name %></span>
+                        <% }); %>
                     </div>
-                    <div class="form-group">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea name="description" class="form-control" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <select name="tags" class="custom-select" required>
-                            <option value="" selected>Pick a tag</option>
-                            <% game.tags.forEach(tag => { %>
-                                <option value="<%= tag._id %>"><%= tag.name %></option>
-                            <% }); %>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        <% } %>
-        <div id="posts" class="mb-3">
-            <% posts.forEach(post => { %>
-                <div class="card p-3 mb-3 shadow-sm">
-                    <h2><a href="/games/<%= game._id %>/posts/<%= post._id %>"><%= post.title %></a></h2>
-                    <small><%= post.author.username %></small>
-                    <p><%= post.description %></p>
+                    <form class="mt-3"action="/games/<%= game._id %>/create">
+                        <button type="submit" class="btn1">Create post</button>
+                    </form>
                 </div>
-            <% }) %>
+            </div>
+        </div>
+        <div id="posts" class="mb-5 text-light">
+            <% if (posts.length != 0) { %>
+                <% posts.forEach(post => { %>
+                    <% if (current_user && post.author._id.equals(current_user._id) || current_user.isAdmin) { %>
+                        <form class="float-right" action="/games/<%= game._id %>/posts/<%= post._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-sm delete-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                              </svg></button>
+                        </form>
+                    <% } %>
+                    <div class="card1 px-5 py-4 mb-4 shadow-sm">
+                        <h2><a class="postTitle" href="/games/<%= game._id %>/posts/<%= post._id %>"><%= post.title %></a></h2>
+                        <small class="mb-1">Posted by <span class="author"><%= post.author.username %> </span>| Tags: <span class="tag py-1 px-1 mr-1">Ranking</span></small>
+                        <p><%= post.description %></p>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="card p-4">
+                    <p class="text-center">No posts yet.</p>
+                </div>
+            <% } %>
         </div>
     </div>
-</body>
 </html>

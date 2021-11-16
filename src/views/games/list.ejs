@@ -10,6 +10,12 @@
 </head>
 <body>
     <h1>List of all games</h1>
+    <form action="/games" action="GET" class="form-inline">
+        <div class="form-group">
+            <input type="text" name="search" placeholder="Search game..." class="form-control">
+            <input type="submit" value="Search" class="btn btn-default">
+        </div>	
+    </form>
     <div class="games">
         <% games.forEach(game => { %>
             <div class="game">
