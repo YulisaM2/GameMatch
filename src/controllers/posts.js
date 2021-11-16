@@ -1,6 +1,6 @@
 var express = require('express');
 
-const { isLoggedIn } = require('../middleware');
+const { isLoggedIn, isPostAuthorOrAdmin} = require('../middleware');
 const { handle } = require('./util/util');
 
 const CommentsController = require('./comments')
@@ -36,6 +36,14 @@ router.post('/', isLoggedIn, async function (req, res) {
     }
 
     res.redirect(`/games/${req.params.gameID}/posts/${newPost._id}`);
+});
+
+router.delete('/:postID', isLoggedIn, isPostAuthorOrAdmin, async function (req, res){
+    const { postID } = req.params;
+    // console.log(req.params);
+    await PostModel.findByIdAndDelete(postID);
+    // req.flash('success', 'Successfully deleted post');
+    res.redirect(`/games/${req.params.gameID}`);
 });
 
 router.use('/:postID/comments/', CommentsController);

@@ -13,28 +13,28 @@ module.exports.isPostAuthorOrAdmin = async(req, res, next) => {
     if(!req.user.isAdmin){
         const { postID } = req.params
         const post = await Post.findById(postID)
-        if(!post.author.equals(req.user._id)){
+        if(!post.author._id.equals(req.user._id)){
             console.log('Unauthorized action')
             // return res.redirect('games/' + `/posts/${postID}`)
             return res.redirect('/')
         }
-        next()
+        return next()
     }
-    next()
+    return next()
 }
 
 module.exports.isCommentAuthorOrAdmin = async(req, res, next) => {
     if(!req.user.isAdmin){
         const { commentID } = req.params
         const comment = await Comment.findById(commentID)
-        if(!comment.author.equals(req.user._id)){
+        if(!comment.author._id.equals(req.user._id)){
             console.log('Unauthorized action')
             // return res.redirect('games/' + `/posts/${id}`)
             return res.redirect('/')
         }
-        next()
+        return next()
     }
-    next()
+    return next()
 }
 
 module.exports.isAdmin = async (req, res, next) => {
