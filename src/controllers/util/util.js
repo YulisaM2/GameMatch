@@ -5,3 +5,7 @@ const handle = (promise) => {
 }
 
 module.exports.handle = handle;
+
+module.exports.escapeRegex = function(text){
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g,"\\$&");
+};
