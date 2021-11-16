@@ -2,63 +2,48 @@
 
     <section class="form my-4 mx-5">
         <div class="container text-light">
-            <!-- <% if (!current_user) { %> -->
-                <div class="col-lg-7 pt-5 pb-4 col-cont">
+            <% if (current_user) { %>
+                <div class="col-lg-9 pt-5 pb-4 m-auto">
                     <h1 class="lbTitle font-weight-bold py-3 text-center">Create a post</h1>
-                    <form class="post-form">
-                        <div class="form-row mb-2">
+                    <form action="/games/<%= game._id %>/posts" method="POST">
+                        <div class="form-row mb-3">
                             <div class="col-lg-12">
                                 <label for="title" class="font-weight-bold">Title</label>
                                 <input type="text" class="form-control mb-2 p-3" name="title" id="title"
                                     required="required">
                             </div>
                         </div>
-                        <div class="form-row mb-2">
+                        <div class="form-row mb-3">
                             <div class="col-lg-12">
                                 <label for="description" class="post-input font-weight-bold">Description</label>
                                 <textarea class="form-control mb-2 p-3" name="description" id="description" rows="6"
                                     required="required"></textarea>
                             </div>
                         </div>
-                        <div class="form-row mb-2">
+                        <div class="form-row mb-3">
                             <div class="col-lg-12">
                                 <label for="tags" class="font-weight-bold">Tags</label>
                                 <div class="dropdown">
-                                    <select class="browser-default custom-select form-control" required="required">
+                                    <select name="tags" class="browser-default custom-select form-control" required>
                                         <option selected disabled="disabled"> Choose a tag</option>
-                                        <option value="1">Tag One</option>
-                                        <option value="2">Tag Two</option>
-                                        <option value="3">Tag Three</option>
-                                        <option value="4">Tag Four</option>
-                                        <option value="5">Tag Five</option>
+                                        <% game.tags.forEach(tag => { %>
+                                            <option value="<%= tag._id %>"><%= tag.name %></option>
+                                        <% }); %>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row mb-5">
-                            <div class="col-lg-6 col-cont">
-                                <button type="button" class="btn1 mt-4">Back</button>
+                        <div class="form-row mb-3">
+                            <div class="col-lg-6 m-auto">
+                                <a href="./"><input class="btn1 mt-4" type=button value='Back'></a>
                             </div>
-                            <div class="col-lg-6 col-cont">
-                                <button type="button" class="btn1 mt-4">Publish</button>
+                            <div class="col-lg-6 m-auto">
+                                <button type="submit" class="btn1 btn-primary mt-4">Publish</button>
                             </div>
                         </div>
                     </form>
                 </div>
-            <!-- <% } %> -->
+            <% } %>
         </div>
     </section>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+<%- include('../partials/footer') %>

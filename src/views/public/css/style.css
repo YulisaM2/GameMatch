@@ -15,17 +15,29 @@ body {
     margin-top: 2px;
 }
 
-.row1 {
-    background: white;
-    border-radius: 31px;
-    box-shadow: 10px 10px 18px black;
-}
-
-
 .row {
     background: rgb(18, 18, 19);
     border-radius: 31px;
     box-shadow: 10px 10px 18px black;
+}
+
+.card {
+    background: rgb(14, 14, 15);
+    border-radius: 5px;
+}
+
+.card1 {
+    background-color: rgb(9, 9, 10);
+    border-radius: 5px;
+}
+
+hr {
+    background-color: rgb(56, 56, 58);
+}
+
+.tag {
+    background-color: #042383;
+    border-radius: 15px;
 }
 
 .loginImg {
@@ -38,7 +50,7 @@ body {
     outline: none;
     height: 50px;
     width: 100%;
-    background-color: rgb(9, 9, 10);
+    background-color: rgb(6, 6, 7);
     /* background-color: #041c66; */
     color: white;
     border-radius: 4px;
@@ -46,13 +58,26 @@ body {
 }
 
 .btn1:hover {
-    background-color: rgb(6, 6, 7);
+    background-color: rgb(9, 9, 10);
     /* background-color: #041c66; */
     color: white;
 }
 
-.col-cont {
-    margin: auto;
+.btn {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: #042383;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #041c66;
+    /* background-color: #041c66; */
+    color: white;
 }
 
 .form-control, .form-control:focus {
@@ -72,7 +97,7 @@ body {
 }
 
 .navbar-brand:hover, .nav-link:hover {
-    color: rgb(189, 197, 243);
+    color: rgb(231, 237, 253);
 }
 
 .postInfo {
@@ -94,28 +119,27 @@ body {
     border-radius: 5px;
 }
 
-.card {
-    background: rgb(14, 14, 15);
+.postTitle {
     color: white;
 }
 
-hr {
-    background-color: rgb(56, 56, 58);
+.postTitle:hover {
+    /* color: #0d3cca; */
+    color: rgb(219, 221, 236);
+    text-decoration: none;
 }
 
-.btn {
-    border: none;
-    outline: none;
-    height: 50px;
-    width: 100%;
-    background-color: #042383;
+.gameLink {
     color: white;
-    border-radius: 4px;
-    font-weight: bold;
 }
 
-.btn:hover {
-    background-color: #041c66;
-    /* background-color: #041c66; */
-    color: white;
+.gameLink:hover {
+    /* color: rgb(209, 211, 226); */
+    /* color: #164ae6; */
+    color: rgb(219, 221, 236);
+    text-decoration: none;
+}
+
+.author {
+    color: rgb(162, 173, 255);
 }
