@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,34 +8,43 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
-<body class="bg-light">
-    <div class="container">
-        <div id="post" class="bg-primary text-white p-5">
-            <h1><%= post.title %></h1>
-            <small><%= post.author.username %></small>
-            <p><%= post.description %></p>
+<body class="bg-light"> -->
+<%- include('../partials/Header') %>
+
+    <div class="container mb-4">
+        <div id="post" class="postInfo px-5 py-5 text-center">
+            <p class="pt-5 mb-0"><a class="gameLink" href="/games/<%= post.game._id %>"><%= post.game.name %></a> | Tags:
+                <% post.tags.forEach(tag => { %>
+                    <span><%=tag.name%></span>
+                <% }); %></p>
+            <h1 class="postTitle mb-3"><%= post.title %></h1>
+            <small>Posted by <%= post.author.username %></small>
+            <p class="mt-1 pb-4"><%= post.description %></p>
         </div>
-        <% if (user !== undefined) { %>
-            <div id="new-comment" class="border rounded p-3 mt-3 mb-3 bg-white shadow-sm">
-                <form action="/games/<%= post.game._id %>/posts/<%= post._id %>/comments" method="POST">
-                    <div class="form-group">
-                        <label for="text" class="form-label">Comment</label>
-                        <textarea name="text" class="form-control" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        <% } %>
-        <div id="comments" class="mt-2">
+        <div class="commentSection pb-2">
+            <% if (user !== undefined) { %>
+                <div id="new-comment" class="commentBox p-4 mt-4 mb-2">
+                    <form action="/games/<%= post.game._id %>/posts/<%= post._id %>/comments" method="POST">
+                        <div class="form-group">
+                            <label for="text" class="form-label pt-2">Comment</label>
+                            <textarea name="text" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
             <% if (post.comments.length != 0) { %>
                 <% post.comments.forEach(comment => { %>
-                    <div class="card shadow-sm bg-white p-3 mb-3">
+                    <div class="card px-4 mb-2">
                         <small><%= comment.author.username %></small>
                         <p><%= comment.text %></p>
+                        <hr>
                     </div>
                 <% }); %>
             <% } else { %>
-                <div class="card p-3 bg-white shadow-sm mb-3">
+                <div class="card px-4 pb-4 mb-3">
                     <p class="text-center mb-0">No comments yet.</p>
                 </div>
             <% } %>

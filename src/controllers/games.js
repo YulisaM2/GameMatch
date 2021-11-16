@@ -41,6 +41,11 @@ router.get('/:id', async (req, res) => {
     res.render('games/single', { game, posts, user: req.user });
 });
 
+router.get('/:id/create', isLoggedIn, (req, res) =>{
+    // res.render('./posts/CreatePost');
+    res.render('posts/CreatePost');
+});
+
 router.use('/:gameID/posts/', PostsController)
 
 module.exports = router

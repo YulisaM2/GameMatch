@@ -66,7 +66,7 @@ mongoose.connect("mongodb://localhost/gameMatch", {
     console.log('DB Connected.');
 
     // Seeding db for local testing
-    // await seedDB();
+    //await seedDB();
 
     app.listen(port, () => {
       console.log(`GameMatch server listening at http://localhost:${port}`)

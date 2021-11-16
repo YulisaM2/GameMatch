@@ -6,7 +6,8 @@
 
 body {
     margin: 0;
-    background: #010f34;
+    /* background: #010f34; */
+    background: rgb(18, 18, 19);
 }
 
 .container {
@@ -14,18 +15,17 @@ body {
     margin-top: 2px;
 }
 
-.row {
-    background: white;
-    border-radius: 31px;
-    box-shadow: 12px 12px 18px black;
-}
-
 .row1 {
     background: white;
+    border-radius: 31px;
+    box-shadow: 10px 10px 18px black;
 }
 
-.lbTitle {
-    color: #010f34;
+
+.row {
+    background: rgb(18, 18, 19);
+    border-radius: 31px;
+    box-shadow: 10px 10px 18px black;
 }
 
 .loginImg {
@@ -38,15 +38,16 @@ body {
     outline: none;
     height: 50px;
     width: 100%;
-    background-color: #010f34;
+    background-color: rgb(9, 9, 10);
+    /* background-color: #041c66; */
     color: white;
     border-radius: 4px;
     font-weight: bold;
 }
 
 .btn1:hover {
-    background: #042383;
-    border: 1px solid;
+    background-color: rgb(6, 6, 7);
+    /* background-color: #041c66; */
     color: white;
 }
 
@@ -54,17 +55,15 @@ body {
     margin: auto;
 }
 
-.post-input {
-    font-weight: bold;
-    color: #010f34;
-}
-
-.form-control {
-    border-color: rgb(155, 154, 154);
+.form-control, .form-control:focus {
+    background-color: rgb(31, 31, 32);
+    border-color: rgb(31, 31, 32);
+    color: white;
 }
 
 .navbar-custom {
     background-color: #042383;
+    /* background-color: rgb(12, 12, 13); */
     box-shadow: 1px 6px 3px -1px rgba(0,0,0,0.35);
 }
 
@@ -74,4 +73,49 @@ body {
 
 .navbar-brand:hover, .nav-link:hover {
     color: rgb(189, 197, 243);
+}
+
+.postInfo {
+    background-image: linear-gradient(#05174d, rgb(18, 18, 19));
+    color: white;
+}
+
+.gameLink, .gameLink:hover {
+    color: white;
+}
+
+.commentBox {
+    color: white;
+    font-weight: semibold;
+}
+
+.commentSection {
+    background: rgb(14, 14, 15);
+    border-radius: 5px;
+}
+
+.card {
+    background: rgb(14, 14, 15);
+    color: white;
+}
+
+hr {
+    background-color: rgb(56, 56, 58);
+}
+
+.btn {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: #042383;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #041c66;
+    /* background-color: #041c66; */
+    color: white;
 }

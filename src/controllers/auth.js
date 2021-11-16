@@ -5,8 +5,13 @@ const passport = require('passport')
 const async = require('async')
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
+const { isLoggedIn } = require('../middleware')
 
 var router = express.Router()
+
+// router.get('/create', (req, res) =>{
+//      res.render('./posts/CreatePost')
+// })
 
 router.get('/register', (req, res) => {
     if(req.isAuthenticated()){
@@ -41,7 +46,7 @@ router.post('/register', async(req, res) => {
     }
 })
 
-router.get('/login', (req, res) => {
+router.get('/login',  (req, res) => {
     if(req.isAuthenticated()){
         console.log('You are already logged in, if you want to log in with a new account first log out')
         return res.redirect('/')
