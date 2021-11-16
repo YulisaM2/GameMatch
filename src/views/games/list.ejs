@@ -12,8 +12,14 @@
     <h1>List of all games</h1>
     <form action="/games" action="GET" class="form-inline">
         <div class="form-group">
-            <input type="text" name="search" placeholder="Search game..." class="form-control">
-            <input type="submit" value="Search" class="btn btn-default">
+            <% if (searched_title){ %>
+                <input type="text" name="search" value="<%= searched_title %>" class="form-control">
+                <input type="submit" value="Search" class="btn btn-default">
+                <input type="submit" value="Clear" name="clear" class="btn btn-default">
+            <% }else{ %>
+                <input type="text" name="search" placeholder="Search game title..." class="form-control">
+                <input type="submit" value="Search" class="btn btn-default">
+            <% } %>
         </div>	
     </form>
     <div class="games">

@@ -49,6 +49,7 @@ passport.deserializeUser(User.deserializeUser())
 app.use((req, res, next) => {
   // console.log(req.query);
   res.locals.current_user = req.user;
+  // res.locals.searched_title = req.query.search;
   next();
 })
 
