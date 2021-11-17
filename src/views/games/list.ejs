@@ -11,13 +11,13 @@
 <body>
     <h1>List of all games</h1>
     <% if (searched_title){ %>
-        <form action="/games" action="GET" class="form-inline">
+        <form action="/games" action="GET" class="form-inline" style="float: left;">
             <div class="form-group">
                 <input type="text" name="search" value="<%= searched_title %>" class="form-control">
                 <input type="submit" value="Search" class="btn btn-default">
             </div>	
         </form>
-        <button onclick="location.href = '/games';" class="btn btn-default" >Clear</button>
+        <button onclick="location.href = '/games';" class="btn btn-default">Clear</button>
     <% }else{ %>
         <form action="/games" action="GET" class="form">
             <div class="form-group">
