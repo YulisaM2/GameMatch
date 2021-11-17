@@ -10,18 +10,7 @@ const PostModel = require('../models/post')
 var router = express.Router()
 
 router.get("/", async function (req, res){
-    if(req.query.clear){
-        const [games, gamesError] = await handle(GameModel.find({deleted: false }));
-        if (gamesError || games === []) {
-            res.status(404).render('not-found');
-
-            return;
-        }
-
-        return res.render('games/list', {games, user: isLoggedIn, searched_title: undefined });
-    }
-
-	if(req.query.search){
+    if(req.query.search){
 		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         const [games, gamesError] = await handle(GameModel.find({ name: regex, deleted: false }));
 

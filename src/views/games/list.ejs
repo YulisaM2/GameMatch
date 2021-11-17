@@ -10,18 +10,22 @@
 </head>
 <body>
     <h1>List of all games</h1>
-    <form action="/games" action="GET" class="form-inline">
-        <div class="form-group">
-            <% if (searched_title){ %>
+    <% if (searched_title){ %>
+        <form action="/games" action="GET" class="form-inline">
+            <div class="form-group">
                 <input type="text" name="search" value="<%= searched_title %>" class="form-control">
                 <input type="submit" value="Search" class="btn btn-default">
-                <input type="submit" value="Clear" name="clear" class="btn btn-default">
-            <% }else{ %>
+            </div>	
+        </form>
+        <button onclick="location.href = '/games';" class="btn btn-default" >Clear</button>
+    <% }else{ %>
+        <form action="/games" action="GET" class="form">
+            <div class="form-group">
                 <input type="text" name="search" placeholder="Search game title..." class="form-control">
                 <input type="submit" value="Search" class="btn btn-default">
-            <% } %>
-        </div>	
-    </form>
+            </div>	
+        </form>
+    <% } %>
     <div class="games">
         <% games.forEach(game => { %>
             <div class="game">
