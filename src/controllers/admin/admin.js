@@ -112,7 +112,7 @@ router.post('/tags', isAdmin, async function (req, res) {
     const [_, tagSaveError] = await handle(tag.save());
 
     if (tagSaveError) {
-        console.log(gameSaveError);
+        console.log(tagSaveError);
 
         return res.status(500).render('server-error');
     }
@@ -121,13 +121,7 @@ router.post('/tags', isAdmin, async function (req, res) {
 });
 
 router.delete('/tags/:tagID', isAdmin, async (req, res) => {
-    console.log(req.params.tagID);
     const opResult = await TagModel.deleteOne({ _id: req.params.tagID });
-    console.log(opResult);
-
-    if (opResult.modifiedCount < 1) {
-        return res.status(404).redirect('/admin/tags');
-    }
 
     res.redirect('/admin/tags');
 });
