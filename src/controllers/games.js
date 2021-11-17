@@ -25,7 +25,6 @@ router.get("/", async function (req, res){
             res.render('games/list', {games, user: isLoggedIn, searched_title: req.query.search});
         }
 
-
 	}else{
         const [games, gamesError] = await handle(GameModel.find({deleted: false }));
         if (gamesError || games === []) {

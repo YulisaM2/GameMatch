@@ -88,4 +88,70 @@ router.delete('/games/:gameID', isAdmin, async (req, res) => {
     res.redirect('/admin/games');
 });
 
+router.get('/tags', isAdmin, async (req, res) => {
+    const [tags, tagsError] = await handle(TagModel.find());
+
+    if (tagsError) {
+        console.log(tagsError);
+
+        return res.status(500).render('server-error');
+    }
+
+    res.render('admin/tags', { tags });
+});
+
+router.post('/tags', isAdmin, async function (req, res) {
+    if (
+        req.body.name  === undefined || req.body.name  === null
+    ) {
+        return res.status(400).render('bad-request');
+    }
+
+    const tag = new TagModel(req.body);
+
+    const [_, tagSaveError] = await handle(tag.save());
+
+    if (tagSaveError) {
+        console.log(gameSaveError);
+
+        return res.status(500).render('server-error');
+    }
+
+    res.status(200).redirect('/admin/tags');
+});
+
+router.delete('/tags/:tagID', isAdmin, async (req, res) => {
+    console.log(req.params.tagID);
+    const opResult = await TagModel.deleteOne({ _id: req.params.tagID });
+    console.log(opResult);
+
+    if (opResult.modifiedCount < 1) {
+        return res.status(404).redirect('/admin/tags');
+    }
+
+    res.redirect('/admin/tags');
+});
+
+router.put('/tags/:tagID', isAdmin, async function (req, res) {
+    let [tag, tagError] = await handle(TagModel.findOne({ _id: req.params.tagID }).exec());
+
+    if (tagError || tag === undefined) {
+        console.log(tagError);
+
+        return res.status(404).render('not-found');
+    }
+
+    tag.name  = req.body.name;
+
+    [tag, tagError] = await handle(tag.save());
+
+    if (tagError) {
+        console.log(tagError);
+
+        return res.status(400).render('bad-request');
+    }
+    
+    res.redirect('/admin/tags');
+});
+
 module.exports = router;

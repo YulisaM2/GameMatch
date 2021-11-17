@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Games | GameMatch</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <h1>Manage Tags</h1>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form id="tag-new" action="/admin/tags" method="POST">
+                        <td>
+                            <input type="text" name="name" class="form-control" required>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </td>
+                    </form>
+                </tr>
+                <% tags.forEach((tag, tagIndex) => { %>
+                    <% if (!tag.deleted) { %>
+                        <tr>
+                            <form id="tag-update-form-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=PUT" method="POST"></form>
+                            <input type="hidden" name="_id" value="<%= tag._id %>" form="tag-update-form-<%= tagIndex %>">
+                            <td>
+                                <input type="text" name="name" value="<%= tag.name %>" class="form-control" form="tag-update-form-<%= tagIndex %>" required>
+                            </td>
+                    
+                            <td>
+                                <button type="submit" class="btn btn-primary" form="tag-update-form-<%= tagIndex %>">Save</button>
+                            </td>
+                            <td>
+                                <form id="tag-delete-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=DELETE" method="POST">
+                                    <button type="submit" class="btn btn-danger" form="tag-delete-<%= tagIndex %>">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <tr class="bg-dark">
+                            <form id="tag-update-form-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=PUT" method="POST"></form>
+                            <input type="hidden" name="_id" value="<%= tag._id %>" form="tag-update-form-<%= tagIndex %>">
+                            <td>
+                                <input type="text" name="name" value="<%= tag.name %>" class="form-control" form="tag-update-form-<%= tagIndex %>" required>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary" form="tag-update-form-<%= tagIndex %>">Save</button>
+                            </td>
+                            <td>
+                                <form id="tag-republish-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=PUT" method="POST">
+                                    <input type="hidden" name="deleted" value="false">
+                                    <button type="submit" class="btn btn-success" form="tag-republish-<%= tagIndex %>">Republish</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
