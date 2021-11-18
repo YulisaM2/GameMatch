@@ -58,6 +58,7 @@
                         <tr>
                             <form id="game-update-form-<%= gameIndex %>" action="/admin/games/<%= game._id %>?_method=PUT" method="POST"></form>
                             <input type="hidden" name="_id" value="<%= game._id %>" form="game-update-form-<%= gameIndex %>">
+                            <input type="hidden" name="deleted" value="false" form="game-update-form-<%= gameIndex %>">
                             <td>
                                 <input type="text" name="name" value="<%= game.name %>" class="form-control" form="game-update-form-<%= gameIndex %>" required>
                             </td>
@@ -93,19 +94,20 @@
                         </tr>
                     <% } else { %>
                         <tr class="bg-dark">
-                            <form id="game-update-form-<%= gameIndex %>" action="/admin/games/<%= game._id %>?_method=PUT" method="POST"></form>
-                            <input type="hidden" name="_id" value="<%= game._id %>" form="game-update-form-<%= gameIndex %>">
+                            <form id="game-deleted-update-form-<%= gameIndex %>" action="/admin/games/<%= game._id %>?_method=PUT" method="POST"></form>
+                            <input type="hidden" name="_id" value="<%= game._id %>" form="game-deleted-update-form-<%= gameIndex %>">
+                            <input type="hidden" name="deleted" value="true" form="game-deleted-update-form-<%= gameIndex %>">
                             <td>
-                                <input type="text" name="name" value="<%= game.name %>" class="form-control" form="game-update-form-<%= gameIndex %>" required>
+                                <input type="text" name="name" value="<%= game.name %>" class="form-control" form="game-deleted-update-form-<%= gameIndex %>" required>
                             </td>
                             <td>
                                 <img src="<%= game.image %>" alt="<%= game.name %> poster" class="ratio" style="--bs-aspect-ratio: 178%; max-width: 50px;">
-                                <input type="text" name="image" value="<%= game.image %>" class="form-control" form="game-update-form-<%= gameIndex %>" required>
+                                <input type="text" name="image" value="<%= game.image %>" class="form-control" form="game-deleted-update-form-<%= gameIndex %>" required>
                             </td>
                             <td>
                                 <div id="tag-list-<%= gameIndex %>">
                                     <% game.tags.forEach((tag, tagIndex) => { %>
-                                        <input id="tag-hidden-input-<%= gameIndex %>-<%= tagIndex %>" type="hidden" name="tags[]" value="<%= tag._id %>" form="game-update-form-<%= gameIndex %>">
+                                        <input id="tag-hidden-input-<%= gameIndex %>-<%= tagIndex %>" type="hidden" name="tags[]" value="<%= tag._id %>" form="game-deleted-update-form-<%= gameIndex %>">
                                         <span id="tag-<%= gameIndex %>-<%= tagIndex %>" class="badge badge-primary"><%= tag.name %> <button id="tag-delete-<%= gameIndex %>-<%= tagIndex %>" class="btn badge badge-danger">X</button></span>
                                     <% }); %>
                                 </div>
@@ -120,10 +122,16 @@
                                 </div>
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-primary" form="game-update-form-<%= gameIndex %>">Save</button>
+                                <button type="submit" class="btn btn-primary" form="game-deleted-update-form-<%= gameIndex %>">Save</button>
                             </td>
                             <td>
                                 <form id="game-republish-<%= gameIndex %>" action="/admin/games/<%= game._id %>?_method=PUT" method="POST">
+                                    <input type="hidden" name="_id" value="<%= game._id %>">
+                                    <input type="hidden" name="name" value="<%= game.name %>">
+                                    <input type="hidden" name="image" value="<%= game.image %>">
+                                    <% game.tags.forEach((tag, tagIndex) => { %>
+                                        <input type="hidden" name="tags[]" value="<%= tag._id %>">
+                                    <% }); %>
                                     <input type="hidden" name="deleted" value="false">
                                     <button type="submit" class="btn btn-success" form="game-republish-<%= gameIndex %>">Republish</button>
                                 </form>
@@ -160,7 +168,12 @@
                 inputElem.setAttribute('type', 'hidden');
                 inputElem.setAttribute('name', 'tags[]');
                 inputElem.value = `${selectedTag._id}`;
-                inputElem.setAttribute('form', `game-update-form-${gameIndex}`);
+                if (game.deleted) {
+                    inputElem.setAttribute('form', `game-deleted-update-form-${gameIndex}`);
+                } else {
+                    inputElem.setAttribute('form', `game-update-form-${gameIndex}`);
+                }
+                
 
                 const tagElem = document.createElement('span');
                 tagElem.setAttribute('id', `tag-${gameIndex}-${game.tags.length}`);

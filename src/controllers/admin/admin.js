@@ -63,9 +63,10 @@ router.put('/games/:gameID', isAdmin, async function (req, res) {
         return res.status(404).render('not-found');
     }
 
-    game.name  = req.body.name;
-    game.image = req.body.image;
-    game.tags  = req.body.tags;
+    game.name    = req.body.name;
+    game.image   = req.body.image;
+    game.tags    = req.body.tags;
+    game.deleted = req.body.deleted;
 
     [game, gameError] = await handle(game.save());
 
