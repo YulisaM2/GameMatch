@@ -17,6 +17,7 @@ const auth     = require('./controllers/auth')
 const admin    = require('./controllers/admin/admin')
 
 const seedDB   = require("./seeds")
+const { noCache } = require('./middleware');
 
 const app = express()
 const port = 5000
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
   next();
 })
 
+app.use(noCache);
 app.use('/', home)
 app.use('/api', api)
 app.use('/games', games)
