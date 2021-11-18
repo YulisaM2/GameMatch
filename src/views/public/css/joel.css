@@ -1,0 +1,170 @@
+body {
+  overflow-x: hidden;
+  
+}
+
+
+.display-3{
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px black;
+  
+}
+
+.lead{
+  color: #eee;
+  
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #010f34;
+  border-color: #010f34;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #000615;
+  border-color: #010f34;
+}
+
+.navbar .nav-link {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  color: #eee;
+}
+
+.navbar-custom {
+  background-color: #010f34;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: white;
+}
+
+.navbar .nav-item.active {
+  border-left: white 3px solid;
+}
+
+
+
+.carousel-item {
+  height: 500px;
+  box-shadow: rgb(0, 0, 0);
+  text-shadow: rgb(0, 0, 0);
+
+}
+
+
+.carousel-image-1 {
+  background: url('/css/LoL1.jpeg');
+  background-size: cover;
+  
+}
+
+
+.carousel-image-2 {
+  background: url('/css/CSGO1.jpeg');
+  background-size: cover;
+}
+
+.carousel-image-3 {
+  background: url('/css/CoD1.jpeg');
+  background-size: cover;
+}
+
+#home-heading {
+  position: relative;
+  min-height: 250px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #fff;
+  padding: 50px 10px 50px 10px;
+}
+
+.light-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(34, 34, 34);
+}
+
+
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #010f34;
+}
+
+#home-icons{
+  background-color: rgb(34, 34, 34);
+  color: #fff;
+  min-height: 150px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 50px 10px 50px 10px;
+}
+
+#video-play {
+  position: relative;
+  min-height: 300px;
+  background: url('../img/media.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: 0 -300px;
+  text-align: center;
+  color: #fff;
+  padding: 50px 10px 50px 10px;
+}
+
+.container{
+  height: auto;
+}
+
+.container-fluid{
+  height: auto;
+}
+
+#video-play a {
+  color: #fff;
+}
+
+#page-header {
+  height: 200px;
+  background: url('../img/image1.jpg');
+  background-position: 0 -360px;
+  background-attachment: fixed;
+  color: #fff;
+  border-bottom: 1px #eee solid;
+  padding-top: 50px;
+}
+
+.about-img {
+  margin-top: -50px;
+}
+
+#faq .card {
+  border: #444;
+}
+
+#faq a {
+  text-decoration: none;
+}
+
+#faq .card-body,
+#faq .card-header {
+  background: #333;
+}
+
+#main-footer {
+  background: #010f34;
+  color: #fff;
+}
