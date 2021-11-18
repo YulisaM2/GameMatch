@@ -1,7 +1,8 @@
 var express = require('express');
 
 const GameModel = require('../../models/game');
-const TagModel = require('../../models/tag');
+const TagModel  = require('../../models/tag');
+const UserModel = require('../../models/user');
 
 const { handle } = require('../util/util');
 const { isAdmin } = require('../../middleware');
@@ -87,6 +88,75 @@ router.delete('/games/:gameID', isAdmin, async (req, res) => {
     }
 
     res.redirect('/admin/games');
+});
+
+router.get("/users", isAdmin, async (_, res) => {
+    const [users, usersError] = await handle(UserModel.find().sort({ createdAt: 'desc' }));
+
+    if (usersError) {
+        console.log(usersError);
+
+        return res.status(500).render('server-error');
+    }
+
+    res.render('admin/users', { users });
+});
+
+router.post('/users', isAdmin, async function (req, res) {
+    if (
+        req.body.username  === undefined || req.body.username  === null ||
+        req.body.email === undefined || req.body.email === null ||
+        req.body.isAdmin  === undefined || req.body.isAdmin  === null
+    ) {
+        return res.status(400).render('bad-request');
+    }
+
+    const user = new UserModel(req.body);
+
+    const [_, userSaveError] = await handle(user.save());
+
+    if (userSaveError) {
+        console.log(userSaveError);
+
+        return res.status(500).render('server-error');
+    }
+
+    res.status(200).redirect('/admin/users');
+})
+
+router.put('/users/:userID', isAdmin, async function (req, res) {
+    let [user, userError] = await handle(UserModel.findOne({ _id: req.params.userID }).exec());
+
+    if (userError || user === undefined) {
+        console.log(userError);
+
+        return res.status(404).render('not-found');
+    }
+
+    user.username = req.body.username;
+    user.email    = req.body.email;
+    user.isAdmin  = req.body.isAdmin;
+    user.deleted  = req.body.deleted;
+
+    [user, userError] = await handle(user.save());
+
+    if (userError) {
+        console.log(userError);
+
+        return res.status(400).render('bad-request');
+    }
+    
+    res.redirect('/admin/users');
+})
+
+router.delete('/users/:userID', isAdmin, async (req, res) => {
+    const opResult = await UserModel.updateOne({ _id: req.params.userID }, { deleted: true });
+
+    if (opResult.modifiedCount < 1) {
+        return res.status(404).redirect('/admin/users');
+    }
+
+    res.redirect('/admin/users');
 });
 
 module.exports = router;
