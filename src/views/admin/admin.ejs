@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,26 +8,27 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
-<body class="bg-light">
-    <div class="container">
-        <h1 class="my-5">Administrative Dashboard</h1>
-        <div class="row">
+<body class="bg-light"> -->
+<%- include('../partials/Header') %>
+    <div class="container my-5">
+        <h1 class="text-center text-light mb-5">Administrative Dashboard</h1>
+        <div class="row no-border">
             <div class="col-4 mb-3">
-                <a href="/admin/games" class="d-block card shadow-sm bg-white p3">
+                <a href="/admin/games" class="d-block card dark shadow-md p3">
                     <h2 class="my-5 text-center">Games</h2>
                 </a>
             </div>
             <div class="col-4 mb-3">
-                <a href="/admin/users" class="d-block card shadow-sm bg-white p3">
+                <a href="/admin/users" class="d-block card dark shadow-md p3">
                     <h2 class="my-5 text-center">Users</h2>
                 </a>
             </div>
             <div class="col-4 mb-3">
-                <a href="/admin/tags" class="d-block card shadow-sm bg-white p3">
+                <a href="/admin/tags" class="d-block card dark shadow-md p3">
                     <h2 class="my-5 text-center">Tags</h2>
                 </a>
             </div>
         </div>
     </div>
-</body>
-</html>
+    <div class="spacer"></div>
+<%- include('../partials/footer') %>

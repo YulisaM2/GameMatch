@@ -10,7 +10,6 @@
 </head>
 <body class="bg-light"> -->
 <%- include('../partials/Header') %>
-
     <div class="container">
         <div class="gameInfo my-5 text-center text-light">
             <div class="d-flex">
@@ -34,7 +33,7 @@
                 <% posts.forEach(post => { %>
                     <div class="card1 px-5 py-4 mb-4 shadow-sm">
                         <h2><a class="postTitle" href="/games/<%= game._id %>/posts/<%= post._id %>"><%= post.title %></a></h2>
-                        <small class="mb-1">Posted by <span class="author"><%= post.author.username %> </span>| Tags: <span class="tag py-1 px-1 mr-1">Ranking</span></small>
+                        <small class="mb-1">Posted by <span class="author"><%= post.author.username %> </span>| Tags: <span class="tag py-1 px-2 mr-1">Ranking</span></small>
                         <p><%= post.description %></p>
                     </div>
                 <% }) %>
@@ -45,4 +44,4 @@
             <% } %>
         </div>
     </div>
-</html>
+<%- include('../partials/footer') %>

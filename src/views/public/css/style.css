@@ -6,8 +6,9 @@
 
 body {
     margin: 0;
-    /* background: #010f34; */
     background: rgb(18, 18, 19);
+    height: 100%;
+    min-height: 100%;
 }
 
 .container {
@@ -22,21 +23,15 @@ body {
 }
 
 .card {
-    background: rgb(14, 14, 15);
+    background: rgb(10, 10, 11);
     border-radius: 5px;
 }
 
 .card1 {
-    background-color: rgb(9, 9, 10);
     background-color: rgb(18, 18, 19);
-    outline: 1px solid rgb(37, 37, 39);
+    outline: 2px solid rgb(37, 37, 39);
     border-radius: 5px;
 }
-
-/* .card1 {
-    background-color: rgb(9, 9, 10);
-    border-radius: 5px;
-} */
 
 hr {
     background-color: rgb(56, 56, 58);
@@ -52,24 +47,6 @@ hr {
     border-bottom-left-radius: 30px;
 }
 
-.btn1 {
-    border: none;
-    outline: none;
-    height: 50px;
-    width: 100%;
-    background-color: rgb(6, 6, 7);
-    /* background-color: #041c66; */
-    color: white;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-.btn1:hover {
-    background-color: rgb(9, 9, 10);
-    /* background-color: #041c66; */
-    color: white;
-}
-
 .btn {
     border: none;
     outline: none;
@@ -83,8 +60,27 @@ hr {
 
 .btn:hover {
     background-color: #041c66;
-    /* background-color: #041c66; */
     color: white;
+}
+
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: rgb(6, 6, 7);
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn1:hover {
+    background-color: rgb(3, 3, 4);
+    color: white;
+}
+
+.btn2 {
+    border: none;
 }
 
 .form-control, .form-control:focus {
@@ -95,7 +91,6 @@ hr {
 
 .navbar-custom {
     background-color: #042383;
-    /* background-color: rgb(12, 12, 13); */
     box-shadow: 1px 6px 3px -1px rgba(0,0,0,0.35);
 }
 
@@ -122,7 +117,7 @@ hr {
 }
 
 .commentSection {
-    background: rgb(14, 14, 15);
+    background: rgb(10, 10, 11);
     border-radius: 5px;
 }
 
@@ -131,7 +126,6 @@ hr {
 }
 
 .postTitle:hover {
-    /* color: #0d3cca; */
     color: rgb(219, 221, 236);
     text-decoration: none;
 }
@@ -141,12 +135,111 @@ hr {
 }
 
 .gameLink:hover {
-    /* color: rgb(209, 211, 226); */
-    /* color: #164ae6; */
     color: rgb(219, 221, 236);
     text-decoration: none;
 }
 
 .author {
     color: rgb(162, 173, 255);
+}
+
+.thead {
+    color: white;
+    background-color: rgb(55, 55, 58);
+}
+
+table.table-bordered {
+    border: 1px solid rgb(37, 37, 39);
+    margin-top:20px;
+}
+
+table.table-bordered > thead > tr > th {
+    border: 1px solid rgb(37, 37, 39);
+}
+
+table.table-bordered > tbody > tr > td {
+    border: 1px solid rgb(37, 37, 39);
+}
+
+.custom-select {
+    background-color: rgb(31, 31, 32);
+    border-color: rgb(31, 31, 32);
+    color: white;
+}
+
+.badge {
+    background-color: #042383;
+    border-radius: 15px;
+    padding: 3px 4px 2px 7px;
+    font-weight: 450;
+}
+
+.deleted-row {
+    background-color: rgba(46, 46, 49, 0.205);
+}
+
+.red {
+    background-color: rgb(117, 12, 12);
+}
+
+.red:hover {
+    background-color: rgb(100, 11, 11);
+}
+
+.green {
+    background-color: rgb(9, 70, 9);
+}
+
+.green:hover {
+    background-color: rgb(8, 56, 8);
+}
+
+.dark {
+    background-color: rgb(6, 6, 7);
+    color: white;
+}
+
+.dark:hover {
+    background-color: rgb(3, 3, 4);
+    color: white;
+    text-decoration: none;
+}
+
+.no-border {
+    border-radius: none;
+    box-shadow: none;
+}
+
+.spacer {
+    margin-bottom: 360px;
+}
+
+.searchbar {
+    min-width: 300px;
+}
+
+.searchbtn {
+    width: 100px;
+    height: calc(1.5em + .75rem + 2px);
+}
+
+.gameImg {
+    min-width: 200;
+    max-width: 250px;
+    min-height: 200;
+    max-height: 333px;
+}
+
+.game-name {
+    color: white;
+}
+
+.game-name:hover {
+    color: rgb(238, 238, 238);
+    text-decoration: none;
+}
+
+.games {
+    background-color: black;
+    background-image: linear-gradient(#05174d, rgb(18, 18, 19));
 }

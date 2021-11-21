@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,31 +8,37 @@
 
     <link rel="stylesheet" href="/css/games/list.css">
 </head>
-<body>
-    <h1>List of all games</h1>
-    <% if (searched_title){ %>
-        <form action="/games" action="GET" class="form-inline" style="float: left;">
-            <div class="form-group">
-                <input type="text" name="search" value="<%= searched_title %>" class="form-control">
-                <input type="submit" value="Search" class="btn btn-default">
-            </div>	
-        </form>
-        <button onclick="location.href = '/games';" class="btn btn-default">Clear</button>
-    <% }else{ %>
-        <form action="/games" action="GET" class="form">
-            <div class="form-group">
-                <input type="text" name="search" placeholder="Search game title..." class="form-control">
-                <input type="submit" value="Search" class="btn btn-default">
-            </div>	
-        </form>
-    <% } %>
-    <div class="games">
-        <% games.forEach(game => { %>
-            <div class="game">
-                <img src="<%= game.image %>" alt="<%= game.name %> poster">
-                <h2><a href="/games/<%= game._id %>"><%= game.name %></a></h2>
+<body> -->
+<%- include('../partials/Header') %>
+    <div class="container my-5">
+        <h1 class="text-center text-light mb-4">List of all games</h1>
+        <% if (searched_title){ %>
+            <div class="d-flex mb-4">
+                <form action="/games" action="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" value="<%= searched_title %>" class="form-control searchbar">
+                        <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
+                    </div>	
+                </form>
+                <button onclick="location.href = '/games';" class="btn1 btn-default searchbtn red ml-1">Clear</button>
             </div>
-        <% }); %>
+        <% }else{ %>
+            <div class="d-flex">
+                <form action="/games" action="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Search game title..." class="form-control searchbar">
+                        <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
+                    </div>	
+                </form>
+            </div>
+        <% } %>
+        <div class="row d-flex games no-border text-center my-4 py-3 px-2">
+            <% games.forEach(game => { %>
+                <div class="col mt-3">
+                    <img class="gameImg" src="<%= game.image %>" alt="<%= game.name %> poster" style="--bs-aspect-ratio: 180%;">
+                    <h2><a class="game-name" href="/games/<%= game._id %>"><%= game.name %></a></h2>
+                </div>
+            <% }); %>
+        </div>
     </div>
-</body>
-</html>
+<%- include('../partials/footer') %>

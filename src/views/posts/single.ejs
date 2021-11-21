@@ -10,7 +10,6 @@
 </head>
 <body class="bg-light"> -->
 <%- include('../partials/Header') %>
-
     <div class="container mb-5">
         <div id="post" class="postInfo px-5 py-4 text-center">
             <% if (current_user && (post.author._id.equals(current_user._id) || current_user.isAdmin)) { %>
@@ -30,7 +29,7 @@
         </div>
         <div class="commentSection text-light pb-2 px-2">
             <% if (user !== undefined) { %>
-                <div id="new-comment" class="commentBox p-4 mt-4 mb-2">
+                <div id="new-comment" class="commentBox p-4 mt-4">
                     <form action="/games/<%= post.game._id %>/posts/<%= post._id %>/comments" method="POST">
                         <div class="form-group">
                             <label for="text" class="form-label pt-2">Leave a comment</label>
@@ -44,7 +43,7 @@
             <% } %>
             <% if (post.comments.length != 0) { %>
                 <% post.comments.forEach(comment => { %>
-                    <div class="card px-4 mb-2">
+                    <div class="card px-4 pt-3">
                         <small class="author font-weight-bold"><%= comment.author.username %>
                             <span> 
                                 <% if (current_user && (comment.author._id.equals(current_user._id) || current_user.isAdmin)) { %>

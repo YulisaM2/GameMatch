@@ -1,9 +1,8 @@
 <%- include('../partials/Header') %>
-
     <section class="form my-4 mx-5">
         <div class="container text-light">
             <% if (current_user) { %>
-                <div class="col-lg-9 pt-5 pb-4 m-auto">
+                <div class="col-lg-9 pt-4 pb-4 m-auto">
                     <h1 class="lbTitle font-weight-bold py-3 text-center">Create a post</h1>
                     <form action="/games/<%= game._id %>/posts" method="POST">
                         <div class="form-row mb-3">
