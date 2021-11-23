@@ -10,7 +10,7 @@ const PostModel = require('../models/post')
 var router = express.Router()
 
 router.get("/", async function (req, res){
-	if(req.query.search){
+    if(req.query.search){
 		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         const [games, gamesError] = await handle(GameModel.find({ name: regex, deleted: false }));
 
@@ -22,9 +22,8 @@ router.get("/", async function (req, res){
             console.log("No game title matched, please try again!");
             res.redirect('back');
         }else{
-            res.render('games/list', {games, user: isLoggedIn });
+            res.render('games/list', {games, user: isLoggedIn, searched_title: req.query.search});
         }
-
 
 	}else{
         const [games, gamesError] = await handle(GameModel.find({deleted: false }));
@@ -34,7 +33,7 @@ router.get("/", async function (req, res){
             return;
         }
 
-        res.render('games/list', {games, user: isLoggedIn });
+        res.render('games/list', {games, user: isLoggedIn, searched_title: undefined});
 
 	}
 });
@@ -56,7 +55,7 @@ router.get('/:id', async (req, res) => {
         return;
     }
 
-    res.render('games/single', { game, posts, user: req.user });
+    res.render('games/single', { game, posts, user: req.user, searched_title: undefined });
 });
 
 router.get('/:id/create', isLoggedIn, async (req, res) =>{

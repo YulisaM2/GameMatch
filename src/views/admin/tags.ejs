@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Manage Tags | GameMatch</title>
+<%- include('../partials/Header') %>
+    <div class="container my-5">
+        <h1 class="text-light text-center my-4">Manage Tags</h1>
+        <table class="table table-bordered">
+            <thead class="thead text-center">
+                <tr>
+                    <th style="width: 70%">Name</th>
+                    <th style="width: 15%">Save</th>
+                    <th style="width: 15%">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form id="tag-new" action="/admin/tags" method="POST">
+                        <td>
+                            <input type="text" name="name" class="form-control" required placeholder="Tag">
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </td>
+                    </form>
+                </tr>
+                <% tags.forEach((tag, tagIndex) => { %>
+                    <% if (!tag.deleted) { %>
+                        <tr>
+                            <form id="tag-update-form-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=PUT" method="POST"></form>
+                            <input type="hidden" name="_id" value="<%= tag._id %>" form="tag-update-form-<%= tagIndex %>">
+                            <td>
+                                <input type="text" name="name" value="<%= tag.name %>" class="form-control" form="tag-update-form-<%= tagIndex %>" required>
+                            </td>
+                    
+                            <td>
+                                <button type="submit" class="btn btn-primary" form="tag-update-form-<%= tagIndex %>">Save</button>
+                            </td>
+                            <td>
+                                <form id="tag-delete-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=DELETE" method="POST">
+                                    <button type="submit" class="btn btn-danger red" form="tag-delete-<%= tagIndex %>">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <tr class="deleted-row">
+                            <form id="tag-update-form-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=PUT" method="POST"></form>
+                            <input type="hidden" name="_id" value="<%= tag._id %>" form="tag-update-form-<%= tagIndex %>">
+                            <td>
+                                <input type="text" name="name" value="<%= tag.name %>" class="form-control" form="tag-update-form-<%= tagIndex %>" required>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary" form="tag-update-form-<%= tagIndex %>">Save</button>
+                            </td>
+                            <td>
+                                <form id="tag-republish-<%= tagIndex %>" action="/admin/tags/<%= tag._id %>?_method=PUT" method="POST">
+                                    <input type="hidden" name="deleted" value="false">
+                                    <button type="submit" class="btn btn-success green" form="tag-republish-<%= tagIndex %>">Republish</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+  <link rel="stylesheet" href="/css/joel.css">
+  <title>GameMatch</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <a class="navbar-brand" href="/"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+                <path
+                    d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2z" />
+                <path
+                    d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23z" />
+            </svg> GameMatch
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/games">Games<span class="sr-only">(current)</span></a>
+                </li>
+                <% if (current_user && current_user.isAdmin) { %>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin">Dashboard<span class="sr-only"></span></a>
+                    </li>
+                <% } %>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <% if(!current_user){ %>
+                    <li class="nav-item  <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item <%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a class="nav-link" href="/register">Register</a></li>
+               <% }else{ %>
+                    <li class="nav-item"><a href="#" class="nav-link text-right">Signed in as <%= current_user.username %><a></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+  <!-- SHOWCASE SLIDER -->
+  <section id="showcase">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      
+      <div class="carousel-inner">
+        <div class="carousel-item carousel-image-1 active">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block mb-5">
+              <h1 class="display-3">Need an ADC?</h1>
+              <p class="lead">Get into our LoL discussion and team up with some buddies.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item carousel-image-2">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block mb-5">
+              <h1 class="display-3">No luck in public games?</h1>
+              <p class="lead">Join our discussion board to get the best tips for your CSGO abilities.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item carousel-image-3">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block mb-5">
+              <h1 class="display-3">Looking for a W?</h1>
+              <p class="lead">Get a team now and go get that W you all deserve.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- 
+      <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+
+      <a href="#myCarousel" data-slide="next" class="carousel-control-next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+
+      -->
+    </div>
+  </section>
+
+  <!--HOME ICON SECTION  -->
+  <section id="home-icons">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <i class="fas fa-bullhorn fa-3x mb-2"></i>
+          <h3>Get a Team</h3>
+          <p>Team up with people searching for the perfect team.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="fas fa-wifi fa-3x mb-2"></i>
+          <h3>Connect</h3>
+          <p>Get the team you want, whenever you need it.</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <i class="fas fa-level-up-alt fa-3x mb-2"></i>
+          <h3>Level Up</h3>
+          <p>Stop being stuck in your current rank and level up with teamwork.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- VIDEO PLAY -->
+    <section id="video-play" class="py-xl-5">
+      <div class="dark-overlay">
+        <div class="row">
+          <div class="col">
+            <div class="container pt-5">
+              <h1>New here? Don't worry!</h1>
+              <em>
+                Picture Tinder but for gamers.
+              </em>
+              <p></p>
+              <p>
+                There are a lot of collaborative or versus video games out there, but now with the pandemic, meeting new people to organize your own team might be harder. The idea is that users can search the game they want to play and then see other people’s profiles with information such as tag, badges, role, gameplay style and more. If the user thinks one of the candidates could be helpful to their team/campaign, they can send a message to notify the other person of their interest.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- HOME HEADING SECTION -->
+  <section id="home-heading">
+    <div class="light-overlay">
+      <div class="row">
+        <div class="col">
+          <div class="container pt-5">
+            <h1>Are you ready to get started?</h1>
+            <p class="d-none d-md-block">Sign in to get access to every post and connect with your perfect team or to find your perfect rival.</p>
+            <a href="/register"><input class="btn btn-primary" type=button value='Register Now!'></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="position:relative; bottom:0; width:100%; box-shadow: 1px 6px 3px -1px rgba(0,0,0,0.35);"class="fixed-bottom text-light">
+    <div class="text-center py-3" style="background-color: #042383;">
+        <p class="py-0 my-0" style="font-size:14px;">Created with <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+              </svg> for DAW.</p> 
+        <p class="py-0 my-0" style="font-size:14px;">©2021 Copyright: Yulisa, Santiago, Lorena, Joel</p>
+    </div>
+  </footer>
+
+  <!-- VIDEO MODAL -->
+  <div class="modal fade" id="videoModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+          <iframe src="" frameborder="0" height="350" width="100%" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+  <script>
+    // Get the current year for the copyright
+    $('#year').text(new Date().getFullYear());
+
+    // Configure Slider
+    $('.carousel').carousel({
+      interval: 6000,
+      pause: 'hover'
+    });
+
+    // Lightbox Init
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+    });
+
+    // Video Play
+    $(function () {
+      // Auto play modal video
+      $(".video").click(function () {
+        var theModal = $(this).data("target"),
+          videoSRC = $(this).attr("data-video"),
+          videoSRCauto = videoSRC + "?modestbranding=1&rel=0&controls=0&showinfo=0&html5=1&autoplay=1";
+        $(theModal + ' iframe').attr('src', videoSRCauto);
+        $(theModal + ' button.close').click(function () {
+          $(theModal + ' iframe').attr('src', videoSRC);
+        });
+      });
+    });
+
+  </script>
+</body>
+
+</html>
