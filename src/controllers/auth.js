@@ -10,7 +10,7 @@ const { isLoggedIn } = require('../middleware')
 var router = express.Router()
 
 // router.get('/create', (req, res) =>{
-//      res.render('./posts/CreatePost')
+//      res.render('./auth/Reset')
 // })
 
 router.get('/register', (req, res) => {
@@ -130,7 +130,7 @@ router.post('/forgot', function(req, res, next) {
         // req.flash("error", "The token to reset your password is invalid or has expired.");
         return res.redirect('/forgot');
       }
-      res.render("reset", {token: req.params.token});
+      res.render("./auth/Reset", {token: req.params.token});
     });
   });
   
@@ -142,7 +142,9 @@ router.post('/forgot', function(req, res, next) {
             // req.flash("error", "The token to reset your password is invalid or has expired.");
             return res.redirect("back");
           }
+          console.log("Checking if passwords match")
           if(req.body.password === req.body.confirm) {
+            console.log("Same passwords")
             user.setPassword(req.body.password, function(err) {
               user.resetPasswordToken = undefined;
               user.resetPasswordExpires = undefined;
