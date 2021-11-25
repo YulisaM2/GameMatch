@@ -41,6 +41,17 @@ router.post('/games', isAdmin, async function (req, res) {
     ) {
         return res.status(400).render('bad-request');
     }
+    
+    // Check if it already exists
+    const [existentGame, existenError] =  await handle(GameModel.findOne({name: req.body.name}));
+    if (existenError) {
+        console.log(existenError);
+        return res.status(500).render('server-error');
+    }
+    if(existentGame !== null){
+        req.flash('error', 'A game with that name already exists.')
+        return res.redirect('back')
+    }
 
     const game = new GameModel(req.body);
 
@@ -66,6 +77,19 @@ router.put('/games/:gameID', isAdmin, async function (req, res) {
     }
 
     game.name    = req.body.name;
+    
+    // Check if it already exists
+    const [existentGame, existenError] =  await handle(GameModel.findOne({name: game.name}));
+    if (existenError) {
+        console.log(existenError);
+        return res.status(500).render('server-error');
+    }
+    console.log(existentGame._id + " " + req.params._id)
+    if(existentGame !== null && !existentGame._id.equals(req.params.gameID)){
+        req.flash('error', 'A game with that name already exists.')
+        return res.redirect('back')
+    }
+
     game.image   = req.body.image;
     game.tags    = req.body.tags;
     game.deleted = req.body.deleted;
