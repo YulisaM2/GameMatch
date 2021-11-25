@@ -16,7 +16,8 @@ var router = express.Router()
 router.get('/register', (req, res) => {
     if(req.isAuthenticated()){
         console.log('To register a new account, log out first')
-        return res.redirect('/')
+        req.flash('error', 'To register a new account, log out first')
+        return res.redirect('/games')
     }
     res.render('./auth/Register')
 })
@@ -38,7 +39,7 @@ router.post('/register', async(req, res) => {
                 }
             })
             
-            res.redirect('/')
+            res.redirect('/games')
         }
     }catch(e){
         console.log("Error: "+ e.message);
@@ -49,14 +50,15 @@ router.post('/register', async(req, res) => {
 router.get('/login',  (req, res) => {
     if(req.isAuthenticated()){
         console.log('You are already logged in, if you want to log in with a new account first log out')
-        return res.redirect('/')
+        return res.redirect('/games')
     }
     res.render('./auth/Login')
 })
 
 router.post('/login', passport.authenticate('local', { failureFlash: false, failureRedirect: '/login' }), (req, res) => {
     console.log("Logged in")
-    res.redirect('/')
+    req.flash('success', 'Welcome back!')
+    res.redirect('/games')
 })
 
 router.get('/logout', (req, res) => {
@@ -67,7 +69,7 @@ router.get('/logout', (req, res) => {
 
 router.get('/forgot', (req, res) => {
     if(req.isAuthenticated()){
-        return res.redirect('/')
+        return res.redirect('back')
     }
     res.render('./auth/Forgot')
 })

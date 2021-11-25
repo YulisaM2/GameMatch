@@ -20,6 +20,7 @@
   "homepage": "https://github.com/YulisaM2/GameMatch#readme",
   "dependencies": {
     "async": "^3.2.2",
+    "connect-flash": "^0.1.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
