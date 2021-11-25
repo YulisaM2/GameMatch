@@ -60,7 +60,7 @@ router.get('/login',  (req, res) => {
     res.render('./auth/Login')
 })
 
-router.post('/login', passport.authenticate('local', { failureFlash: false, failureRedirect: '/login' }), (req, res) => {
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     console.log("Logged in")
     req.flash('success', 'Welcome back, ' + req.user.username + '!');
     res.redirect('/games')
