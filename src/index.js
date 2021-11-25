@@ -94,4 +94,6 @@ mongoose.connect("mongodb://localhost/gameMatch", {
 
 app.get("*", (req, res) =>{
   res.render('not-found');
+  // res.render('server-error');
+  // res.render('bad-request');
 });

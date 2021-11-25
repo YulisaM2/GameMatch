@@ -173,6 +173,28 @@
 
             document.getElementById(`tag-add-${gameIndex}`).onclick = event => {
                 event.preventDefault();
+                if(document.getElementById(`tag-select-${gameIndex}`).value.split(': ')[0] === ""){
+                    return
+                }
+
+                console.log('Before')
+                let currentTag = `tag-${gameIndex}-${game.tags.length}`
+                let temporalTags = document.querySelectorAll(`[id=${currentTag}]`);
+                let tempLenght = temporalTags.length
+                // document.querySelectorAll("[id='`tag-${gameIndex}-${game.tags.length}`']")
+
+                // Check if they are repeated in temporal tags
+                for(let i = 0; i < tempLenght; ++i){
+                    console.log(i)
+                    if(temporalTags[i].firstChild.data.trim() === document.getElementById(`tag-select-${gameIndex}`).value.split(': ')[1].trim()){
+                        // console.log(temporalTags[i].firstChild.data.trim() + ' ' + document.getElementById(`tag-select-${gameIndex}`).value.split(': ')[1].trim())
+                        // console.log(temporalTags[i].firstChild.data.trim() === document.getElementById(`tag-select-${gameIndex}`).value.split(': ')[1].trim())
+                        return
+                    }
+                }
+
+                
+                console.log('After')
 
                 const selectedTag = {
                     _id: document.getElementById(`tag-select-${gameIndex}`).value.split(': ')[0],
@@ -218,11 +240,18 @@
 
         document.getElementById(`tag-add-new`).onclick = event => {
             event.preventDefault();
-
+            if(document.getElementById(`tag-select-new`).value.split(': ')[0] === ""){
+               return
+            }
+           
             const selectedTag = {
                 _id: document.getElementById(`tag-select-new`).value.split(': ')[0],
                 name: document.getElementById(`tag-select-new`).value.split(': ')[1],
             };
+
+            if(document.getElementById(`tag-new-${selectedTag._id}`) !== null){
+                return
+            }
 
             const inputElem = document.createElement('input');
             inputElem.setAttribute('id', `tag-hidden-input-new-${selectedTag._id}`);
