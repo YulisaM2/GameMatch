@@ -89,6 +89,11 @@ hr {
     color: white;
 }
 
+input[type="text"]:disabled {
+    background-color: transparent;
+    border-color: transparent;
+}
+
 .navbar-custom {
     background-color: #042383;
     box-shadow: 1px 6px 3px -1px rgba(0,0,0,0.35);
@@ -224,10 +229,8 @@ table.table-bordered > tbody > tr > td {
 }
 
 .gameImg {
-    min-width: 200;
-    max-width: 250px;
-    min-height: 200;
-    max-height: 333px;
+    width: 250px;
+    height: 350px;
 }
 
 .game-name {
@@ -242,4 +245,28 @@ table.table-bordered > tbody > tr > td {
 .games {
     background-color: black;
     background-image: linear-gradient(#05174d, rgb(18, 18, 19));
+}
+
+.error {
+    font-size: 60px;
+}
+
+.alert {
+    margin-top: 5px;
+}
+
+.alert-danger {
+    background-color: rgba(117, 12, 12, 0.685);
+    border-color: rgb(82, 7, 7);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.alert-success {
+    background-color: rgba(21, 97, 21, 0.685);
+    border-color: rgb(10, 70, 10);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.close:hover {
+    color: white;
 }

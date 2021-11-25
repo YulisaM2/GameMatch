@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Games | GameMatch</title>
-<%- include('../partials/Header') %>
+<%- include('../partials/header') %>
     <div class="container my-5">
         <h1 class="text-center text-light mb-4">List of all games</h1>
         <% if (searched_title){ %>
             <div class="d-flex mb-4">
                 <form action="/games" action="GET" class="form-inline">
                     <div class="form-group">
-                        <input type="text" name="search" value="<%= searched_title %>" class="form-control searchbar">
+                        <input type="text" name="search" value="<%= searched_title %>" class="form-control searchbar" required>
                         <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
                     </div>	
                 </form>
@@ -23,7 +23,7 @@
             <div class="d-flex">
                 <form action="/games" action="GET" class="form-inline">
                     <div class="form-group">
-                        <input type="text" name="search" placeholder="Search game title..." class="form-control searchbar">
+                        <input type="text" name="search" placeholder="Search game title..." class="form-control searchbar" required>
                         <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
                     </div>	
                 </form>
@@ -32,7 +32,7 @@
         <div class="row d-flex games no-border text-center my-4 py-3 px-2">
             <% games.forEach(game => { %>
                 <div class="col mt-3">
-                    <img class="gameImg" src="<%= game.image %>" alt="<%= game.name %> poster" style="--bs-aspect-ratio: 180%;">
+                    <a href="/games/<%= game._id %>"><input type="image" src="<%= game.image %>" alt="<%= game.name %> poster" name="saveForm" class="gameImg submit" id="saveForm" style="--bs-aspect-ratio: 180%;"/></a>
                     <h2 class="pt-2"><a class="game-name" href="/games/<%= game._id %>"><%= game.name %></a></h2>
                 </div>
             <% }); %>

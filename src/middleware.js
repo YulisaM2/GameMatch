@@ -4,6 +4,7 @@ const Comment = require('./models/comment')
 module.exports.isLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()){
         console.log("You must be signed in first")
+        req.flash('error', 'You must be signed in to do that.')
         return res.redirect('/login')
     }
     next();
@@ -15,6 +16,7 @@ module.exports.isPostAuthorOrAdmin = async(req, res, next) => {
         const post = await Post.findById(postID)
         if(!post.author._id.equals(req.user._id)){
             console.log('Unauthorized action')
+            req.flash('error', 'You are not authorized to do that.');
             // return res.redirect('games/' + `/posts/${postID}`)
             return res.redirect('/')
         }
@@ -29,6 +31,7 @@ module.exports.isCommentAuthorOrAdmin = async(req, res, next) => {
         const comment = await Comment.findById(commentID)
         if(!comment.author._id.equals(req.user._id)){
             console.log('Unauthorized action')
+            req.flash('error', 'You are not authorized to do that.');
             // return res.redirect('games/' + `/posts/${id}`)
             return res.redirect('/')
         }

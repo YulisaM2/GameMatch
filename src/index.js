@@ -7,6 +7,7 @@ const methodOverride = require('method-override')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const mongoSanitize = require('express-mongo-sanitize')
+const flash = require("connect-flash")
 
 const User = require('./models/user')
 
@@ -25,9 +26,14 @@ const port = 5000
 app.set('views', process.cwd() + '/src/views')
 app.set('view engine', 'ejs')
 
+app.use(flash());
+
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(mongoSanitize())
+
+app.locals.moment = require('moment');
+app.locals.moment.locale();
 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
@@ -50,6 +56,8 @@ passport.deserializeUser(User.deserializeUser())
 app.use((req, res, next) => {
   // console.log(req.query);
   res.locals.current_user = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
   // res.locals.searched_title = req.query.search;
   next();
 })
@@ -82,3 +90,8 @@ mongoose.connect("mongodb://localhost/gameMatch", {
     console.log(`DB Connection Error: ${err.message}`);
     process.exit(1);
   });
+
+
+app.get("*", (req, res) =>{
+  res.render('not-found');
+});

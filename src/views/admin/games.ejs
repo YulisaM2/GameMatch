@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Manage Games | GameMatch</title>
-<%- include('../partials/Header') %>
+<%- include('../partials/header') %>
     <div class="container my-5">
         <h1 class="text-light text-center my-4">Manage Games</h1>
         <table class="table table-bordered">
@@ -70,9 +70,21 @@
                                 <div class="mt-2">
                                     <select id="tag-select-<%= gameIndex %>" class="custom-select d-inline w-auto mb-3">
                                         <option value="" selected disabled="disabled">Choose a tag</option>
+                                        <% let gameTags = game.tags.length %>
                                         <% tags.forEach(tag => { %>
-                                            <option value="<%= tag._id %>: <%= tag.name %>"><%= tag.name %></option>
+                                            <% for(let i = 0; i < gameTags; ++i){ %>
+                                                <% if(game.tags[i]._id.equals(tag._id)){ %>
+                                                    <% break %>
+                                                <% } %>
+                                                <% if(i === gameTags - 1){ %>
+                                                    <option value="<%= tag._id %>: <%= tag.name %>"><%= tag.name %></option>
+                                                <% } %>
+                                            <% } %>
                                         <% }); %>
+                                        
+                                        <!-- <% tags.forEach(tag => { %>
+                                            <option value="<%= tag._id %>: <%= tag.name %>"><%= tag.name %></option>
+                                        <% }); %> -->
                                     </select>
                                     <button id="tag-add-<%= gameIndex %>" class="btn1 btn-primary d-inline">Add</button>
                                 </div>
@@ -109,9 +121,17 @@
                                 </div>
                                 <div class="mt-2">
                                     <select id="tag-select-<%= gameIndex %>" class="custom-select d-inline w-auto mb-3">
+                                        <% let gameTags = game.tags.length %>
                                         <option value="" selected disabled="disabled">Choose a tag</option>
                                         <% tags.forEach(tag => { %>
-                                            <option value="<%= tag._id %>: <%= tag.name %>"><%= tag.name %></option>
+                                            <% for(let i = 0; i < gameTags; ++i){ %>
+                                                <% if(game.tags[i]._id.equals(tag._id)){ %>
+                                                    <% break %>
+                                                <% } %>
+                                                <% if(i === gameTags - 1){ %>
+                                                    <option value="<%= tag._id %>: <%= tag.name %>"><%= tag.name %></option>
+                                                <% } %>
+                                            <% } %>
                                         <% }); %>
                                     </select>
                                     <button id="tag-add-<%= gameIndex %>" class="btn1 btn-primary d-inline">Add</button>

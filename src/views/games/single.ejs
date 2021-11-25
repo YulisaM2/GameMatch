@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title><%= game.name %> | GameMatch</title>
-<%- include('../partials/Header') %>
+<%- include('../partials/header') %>
     <div class="container">
         <div class="gameInfo my-5 text-center text-light">
             <div class="d-flex">
@@ -30,7 +30,14 @@
                 <% posts.forEach(post => { %>
                     <div class="card1 px-5 py-4 mb-4 shadow-sm">
                         <h2><a class="postTitle" href="/games/<%= game._id %>/posts/<%= post._id %>"><%= post.title %></a></h2>
-                        <small class="mb-1">Posted by <span class="author"><%= post.author.username %> </span>| Tags: <span class="tag py-1 px-2 mr-1">Ranking</span></small>
+                        <small class="mb-1">Posted by <span class="author"><%= post.author.username %> </span>| Tags: 
+                            <% if(post.tags === undefined || post.tags.length == 0){ %>
+                                <span class="">None</span>
+                            <% } %>
+                            <% post.tags.forEach(tag => { %>
+                                <span class="tag py-1 px-2"><%=tag.name %></span>
+                            <% }); %></p>
+                        </small>
                         <p><%= post.description %></p>
                     </div>
                 <% }) %>

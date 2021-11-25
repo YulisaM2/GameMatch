@@ -22,7 +22,7 @@ router.get("/games", isAdmin, async (_, res) => {
         return res.status(500).render('server-error');
     }
 
-    const [tags, tagsError] = await handle(TagModel.find());
+    const [tags, tagsError] = await handle(TagModel.find().sort({ name: 'asc' }));
 
     if (tagsError) {
         console.log(tagsError);
@@ -41,6 +41,17 @@ router.post('/games', isAdmin, async function (req, res) {
     ) {
         return res.status(400).render('bad-request');
     }
+    
+    // Check if it already exists
+    const [existentGame, existenError] =  await handle(GameModel.findOne({name: req.body.name}));
+    if (existenError) {
+        console.log(existenError);
+        return res.status(500).render('server-error');
+    }
+    if(existentGame !== null){
+        req.flash('error', 'A game with that name already exists.')
+        return res.redirect('back')
+    }
 
     const game = new GameModel(req.body);
 
@@ -52,6 +63,7 @@ router.post('/games', isAdmin, async function (req, res) {
         return res.status(500).render('server-error');
     }
 
+    req.flash('success', 'Game added successfully.');
     res.status(200).redirect('/admin/games');
 })
 
@@ -65,6 +77,18 @@ router.put('/games/:gameID', isAdmin, async function (req, res) {
     }
 
     game.name    = req.body.name;
+    
+    // Check if it already exists
+    const [existentGame, existenError] =  await handle(GameModel.findOne({name: game.name}));
+    if (existenError) {
+        console.log(existenError);
+        return res.status(500).render('server-error');
+    }
+    if(existentGame !== null && !existentGame._id.equals(req.params.gameID)){
+        req.flash('error', 'A game with that name already exists.')
+        return res.redirect('back')
+    }
+
     game.image   = req.body.image;
     game.tags    = req.body.tags;
     game.deleted = req.body.deleted;
@@ -77,6 +101,7 @@ router.put('/games/:gameID', isAdmin, async function (req, res) {
         return res.status(400).render('bad-request');
     }
     
+    req.flash('success', 'Game updated successfully.');
     res.redirect('/admin/games');
 })
 
@@ -87,6 +112,7 @@ router.delete('/games/:gameID', isAdmin, async (req, res) => {
         return res.status(404).redirect('/admin/games');
     }
 
+    req.flash('success', 'Game deleted successfully.');
     res.redirect('/admin/games');
 });
 
@@ -120,7 +146,7 @@ router.post('/users', isAdmin, async function (req, res) {
 
         return res.status(500).render('server-error');
     }
-
+    req.flash('success', 'User added successfully.');
     res.status(200).redirect('/admin/users');
 })
 
@@ -145,7 +171,7 @@ router.put('/users/:userID', isAdmin, async function (req, res) {
 
         return res.status(400).render('bad-request');
     }
-    
+    req.flash('success', 'User updated successfully.');
     res.redirect('/admin/users');
 })
 
@@ -155,13 +181,14 @@ router.delete('/users/:userID', isAdmin, async (req, res) => {
     if (opResult.modifiedCount < 1) {
         return res.status(404).redirect('/admin/users');
     }
-
+    req.flash('success', 'User deleted successfully.');
     res.redirect('/admin/users');
 });
 
 // ================ TAGS
 router.get('/tags', isAdmin, async (req, res) => {
-    const [tags, tagsError] = await handle(TagModel.find());
+    // const [tags, tagsError] = await handle(TagModel.find());
+    const [tags, tagsError] = await handle(TagModel.find().sort({ createdAt: 'desc' }));
 
     if (tagsError) {
         console.log(tagsError);
@@ -179,6 +206,17 @@ router.post('/tags', isAdmin, async function (req, res) {
         return res.status(400).render('bad-request');
     }
 
+    // Check if it already exists
+    const [existentTag, existenError] =  await handle(TagModel.findOne({name: req.body.name}));
+    if (existenError) {
+        console.log(existenError);
+        return res.status(500).render('server-error');
+    }
+    if(existentTag !== null){
+        req.flash('error', 'A tag with that name already exists.')
+        return res.redirect('back')
+    }
+
     const tag = new TagModel(req.body);
 
     const [_, tagSaveError] = await handle(tag.save());
@@ -188,13 +226,14 @@ router.post('/tags', isAdmin, async function (req, res) {
 
         return res.status(500).render('server-error');
     }
-
+    req.flash('success', 'Tag added successfully.');
     res.status(200).redirect('/admin/tags');
 });
 
 router.delete('/tags/:tagID', isAdmin, async (req, res) => {
     const opResult = await TagModel.deleteOne({ _id: req.params.tagID });
 
+    req.flash('success', 'Tag deleted successfully.');
     res.redirect('/admin/tags');
 });
 
@@ -208,6 +247,16 @@ router.put('/tags/:tagID', isAdmin, async function (req, res) {
     }
 
     tag.name  = req.body.name;
+     // Check if it already exists
+     const [existentTag, existenError] =  await handle(TagModel.findOne({name: tag.name}));
+     if (existenError) {
+         console.log(existenError);
+         return res.status(500).render('server-error');
+     }
+     if(existentTag !== null){
+         req.flash('error', 'A tag with that name already exists.')
+         return res.redirect('back')
+     }
 
     [tag, tagError] = await handle(tag.save());
 
@@ -216,7 +265,7 @@ router.put('/tags/:tagID', isAdmin, async function (req, res) {
 
         return res.status(400).render('bad-request');
     }
-    
+    req.flash('success', 'Tag updated successfully.');
     res.redirect('/admin/tags');
 });
 
