@@ -92,7 +92,6 @@ mongoose.connect("mongodb://localhost/gameMatch", {
   });
 
 
-//   app.get("*", function(req, res){
-//     req.flash("error", "This address is invalid.");
-//     res.redirect("/");
-// });
+app.get("*", (req, res) =>{
+  res.render('not-found');
+});
