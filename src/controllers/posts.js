@@ -34,7 +34,7 @@ router.post('/', isLoggedIn, async function (req, res) {
 
         return res.status(400).render('bad-request');
     }
-
+    req.flash('success', 'Post added successfully.');
     res.redirect(`/games/${req.params.gameID}/posts/${newPost._id}`);
 });
 
@@ -42,7 +42,7 @@ router.delete('/:postID', isLoggedIn, isPostAuthorOrAdmin, async function (req, 
     const { postID } = req.params;
     // console.log(req.params);
     await PostModel.findByIdAndDelete(postID);
-    // req.flash('success', 'Successfully deleted post');
+    req.flash('success', 'Post deleted successfully.');
     res.redirect(`/games/${req.params.gameID}`);
 });
 
