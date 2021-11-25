@@ -52,6 +52,7 @@ router.post('/games', isAdmin, async function (req, res) {
         return res.status(500).render('server-error');
     }
 
+    req.flash('success', 'Game added successfully.');
     res.status(200).redirect('/admin/games');
 })
 
@@ -77,6 +78,7 @@ router.put('/games/:gameID', isAdmin, async function (req, res) {
         return res.status(400).render('bad-request');
     }
     
+    req.flash('success', 'Game updated successfully.');
     res.redirect('/admin/games');
 })
 
@@ -87,6 +89,7 @@ router.delete('/games/:gameID', isAdmin, async (req, res) => {
         return res.status(404).redirect('/admin/games');
     }
 
+    req.flash('success', 'Game deleted successfully.');
     res.redirect('/admin/games');
 });
 
@@ -120,7 +123,7 @@ router.post('/users', isAdmin, async function (req, res) {
 
         return res.status(500).render('server-error');
     }
-
+    req.flash('success', 'User added successfully.');
     res.status(200).redirect('/admin/users');
 })
 
@@ -145,7 +148,7 @@ router.put('/users/:userID', isAdmin, async function (req, res) {
 
         return res.status(400).render('bad-request');
     }
-    
+    req.flash('success', 'User updated successfully.');
     res.redirect('/admin/users');
 })
 
@@ -155,7 +158,7 @@ router.delete('/users/:userID', isAdmin, async (req, res) => {
     if (opResult.modifiedCount < 1) {
         return res.status(404).redirect('/admin/users');
     }
-
+    req.flash('success', 'User deleted successfully.');
     res.redirect('/admin/users');
 });
 
@@ -188,13 +191,14 @@ router.post('/tags', isAdmin, async function (req, res) {
 
         return res.status(500).render('server-error');
     }
-
+    req.flash('success', 'Tag added successfully.');
     res.status(200).redirect('/admin/tags');
 });
 
 router.delete('/tags/:tagID', isAdmin, async (req, res) => {
     const opResult = await TagModel.deleteOne({ _id: req.params.tagID });
 
+    req.flash('success', 'Tag deleted successfully.');
     res.redirect('/admin/tags');
 });
 
@@ -216,7 +220,7 @@ router.put('/tags/:tagID', isAdmin, async function (req, res) {
 
         return res.status(400).render('bad-request');
     }
-    
+    req.flash('success', 'Tag updated successfully.');
     res.redirect('/admin/tags');
 });
 
