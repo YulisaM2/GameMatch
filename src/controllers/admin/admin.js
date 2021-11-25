@@ -165,6 +165,7 @@ router.delete('/users/:userID', isAdmin, async (req, res) => {
 // ================ TAGS
 router.get('/tags', isAdmin, async (req, res) => {
     const [tags, tagsError] = await handle(TagModel.find());
+    // const [tags, tagsError] = await handle(TagModel.find().sort({ createdAt: 'desc' }));
 
     if (tagsError) {
         console.log(tagsError);
