@@ -229,10 +229,8 @@ table.table-bordered > tbody > tr > td {
 }
 
 .gameImg {
-    min-width: 200;
-    max-width: 250px;
-    min-height: 200;
-    max-height: 333px;
+    width: 250px;
+    height: 350px;
 }
 
 .game-name {

@@ -32,7 +32,7 @@
         <div class="row d-flex games no-border text-center my-4 py-3 px-2">
             <% games.forEach(game => { %>
                 <div class="col mt-3">
-                    <img class="gameImg" src="<%= game.image %>" alt="<%= game.name %> poster" style="--bs-aspect-ratio: 180%;">
+                    <a href="/games/<%= game._id %>"><input type="image" src="<%= game.image %>" alt="<%= game.name %> poster" name="saveForm" class="gameImg submit" id="saveForm" style="--bs-aspect-ratio: 180%;"/></a>
                     <h2 class="pt-2"><a class="game-name" href="/games/<%= game._id %>"><%= game.name %></a></h2>
                 </div>
             <% }); %>
