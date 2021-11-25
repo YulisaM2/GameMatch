@@ -12,7 +12,7 @@ var router = express.Router()
 router.get("/", async function (req, res){
     if(req.query.search){
 		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        const [games, gamesError] = await handle(GameModel.find({ name: regex, deleted: false }));
+        const [games, gamesError] = await handle(GameModel.find({ name: regex, deleted: false }).sort({'name' : 'asc'}));
 
         if (gamesError) {
              res.status(404).render('not-found');
@@ -27,7 +27,7 @@ router.get("/", async function (req, res){
         }
 
 	}else{
-        const [games, gamesError] = await handle(GameModel.find({deleted: false }));
+        const [games, gamesError] = await handle(GameModel.find({deleted: false }).sort({'name' : 'asc'}));
         if (gamesError || games === []) {
             res.status(404).render('not-found');
 
