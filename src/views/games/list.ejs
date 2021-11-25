@@ -13,7 +13,7 @@
             <div class="d-flex mb-4">
                 <form action="/games" action="GET" class="form-inline">
                     <div class="form-group">
-                        <input type="text" name="search" value="<%= searched_title %>" class="form-control searchbar">
+                        <input type="text" name="search" value="<%= searched_title %>" class="form-control searchbar" required>
                         <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
                     </div>	
                 </form>
@@ -23,7 +23,7 @@
             <div class="d-flex">
                 <form action="/games" action="GET" class="form-inline">
                     <div class="form-group">
-                        <input type="text" name="search" placeholder="Search game title..." class="form-control searchbar">
+                        <input type="text" name="search" placeholder="Search game title..." class="form-control searchbar" required>
                         <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
                     </div>	
                 </form>
