@@ -59,7 +59,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:id/create', isLoggedIn, async (req, res) =>{
-    // res.render('./posts/CreatePost');
 
     const [game, gameError] = await handle(GameModel.findOne({ _id: req.params.id, deleted: false }).populate('tags').exec());
 
@@ -69,7 +68,7 @@ router.get('/:id/create', isLoggedIn, async (req, res) =>{
         return;
     }
 
-    res.render('posts/CreatePost', {user: req.user, game});
+    res.render('posts/create-post', {user: req.user, game});
 });
 
 router.use('/:gameID/posts/', PostsController)

@@ -9,17 +9,13 @@ const { isLoggedIn } = require('../middleware')
 
 var router = express.Router()
 
-// router.get('/create', (req, res) =>{
-//      res.render('./auth/Reset')
-// })
-
 router.get('/register', (req, res) => {
     if(req.isAuthenticated()){
         console.log('To register a new account, log out first')
         req.flash('error', 'To register a new account, log out first')
         return res.redirect('/games')
     }
-    res.render('./auth/Register')
+    res.render('./auth/register')
 })
 
 router.post('/register', async(req, res) => {
@@ -57,7 +53,7 @@ router.get('/login',  (req, res) => {
         req.flash('error', 'You are already logged in, if you want to log in with a new account first log out')
         return res.redirect('/games')
     }
-    res.render('./auth/Login')
+    res.render('./auth/login')
 })
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
@@ -77,7 +73,7 @@ router.get('/forgot', (req, res) => {
       req.flash('error', 'You are logged in, to change password logout.')  
       return res.redirect('back')
     }
-    res.render('./auth/Forgot')
+    res.render('./auth/forgot')
 })
 
 router.post('/forgot', function(req, res, next) {
@@ -138,7 +134,7 @@ router.post('/forgot', function(req, res, next) {
         req.flash("error", "The token to reset your password is invalid or has expired.");
         return res.redirect('/forgot');
       }
-      res.render("./auth/Reset", {token: req.params.token});
+      res.render("./auth/reset", {token: req.params.token});
     });
   });
   
