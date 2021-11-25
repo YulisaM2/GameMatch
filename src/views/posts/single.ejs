@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= post.title %> | GameMatch</title>
-<%- include('../partials/Header') %>
+<%- include('../partials/header') %>
     <div class="container mb-5">
         <div id="post" class="postInfo px-5 py-4 text-center">
             <% if (current_user && (post.author._id.equals(current_user._id) || current_user.isAdmin)) { %>
