@@ -27,6 +27,7 @@ router.post('/register', async(req, res) => {
         const {user} = req.body
         if(user.password != user.confirm_password){
             console.log("The passwords do not match.")
+            req.flash('error', 'The passwords do not match.')
             res.redirect('/register')
         }else{
             const user_buffer = new User({email: user.email, username: user.username})
@@ -34,8 +35,10 @@ router.post('/register', async(req, res) => {
             req.login(new_user, e => {
                 if(e){
                     console.log(e)
+                    req.flash('error', e.message)
                 }else{
                     console.log(new_user)
+                    req.flash('success', 'Welcome to GameMatch, ' + req.user.username + '!')
                 }
             })
             
@@ -43,6 +46,7 @@ router.post('/register', async(req, res) => {
         }
     }catch(e){
         console.log("Error: "+ e.message);
+        req.flash('error', e.message)
         res.redirect('/register')
     }
 })
@@ -50,6 +54,7 @@ router.post('/register', async(req, res) => {
 router.get('/login',  (req, res) => {
     if(req.isAuthenticated()){
         console.log('You are already logged in, if you want to log in with a new account first log out')
+        req.flash('error', 'You are already logged in, if you want to log in with a new account first log out')
         return res.redirect('/games')
     }
     res.render('./auth/Login')
@@ -57,7 +62,7 @@ router.get('/login',  (req, res) => {
 
 router.post('/login', passport.authenticate('local', { failureFlash: false, failureRedirect: '/login' }), (req, res) => {
     console.log("Logged in")
-    req.flash('success', 'Welcome back!')
+    req.flash('success', 'Welcome back, ' + req.user.username + '!');
     res.redirect('/games')
 })
 
@@ -69,7 +74,8 @@ router.get('/logout', (req, res) => {
 
 router.get('/forgot', (req, res) => {
     if(req.isAuthenticated()){
-        return res.redirect('back')
+      req.flash('error', 'You are logged in, to change password logout.')  
+      return res.redirect('back')
     }
     res.render('./auth/Forgot')
 })
@@ -85,7 +91,7 @@ router.post('/forgot', function(req, res, next) {
       function(token, done) {
         User.findOne({ email: req.body.email }, function(err, user) {
           if (!user) {
-            // req.flash("error", "There are no accounts registered to this address.");
+            req.flash("error", "There are no accounts registered to this address.");
             return res.redirect("/forgot");
           }
   
@@ -116,7 +122,7 @@ router.post('/forgot', function(req, res, next) {
         };
         smtpTransport.sendMail(mailOptions, function(err) {
           console.log('mail sent');
-        //   req.flash("success", "An email to the address " + user.email + " has been sent with further instructions.");
+          req.flash("success", "An email to the address " + user.email + " has been sent with further instructions.");
           done(err, 'done');
         });
       }
@@ -129,7 +135,7 @@ router.post('/forgot', function(req, res, next) {
   router.get('/forgot/:token', function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
-        // req.flash("error", "The token to reset your password is invalid or has expired.");
+        req.flash("error", "The token to reset your password is invalid or has expired.");
         return res.redirect('/forgot');
       }
       res.render("./auth/Reset", {token: req.params.token});
@@ -141,7 +147,7 @@ router.post('/forgot', function(req, res, next) {
       function(done) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
-            // req.flash("error", "The token to reset your password is invalid or has expired.");
+            req.flash("error", "The token to reset your password is invalid or has expired.");
             return res.redirect("back");
           }
           console.log("Checking if passwords match")
@@ -158,7 +164,7 @@ router.post('/forgot', function(req, res, next) {
               });
             })
           } else {
-            //   req.flash("error", "The passwords do not match.");
+              req.flash("error", "The passwords do not match.");
               return res.redirect("back");
           }
         });
@@ -175,17 +181,17 @@ router.post('/forgot', function(req, res, next) {
           to: user.email,
           from: process.env.GMAIL,
           subject: 'GameMatch: Your password has been reset',
-          text: 'Hola,\n\n' +
+          text: 'Hey,\n\n' +
             'This is official confirmation that the password for your account registered to ' + user.email + ' has been successfully updated.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
-            console.log("Password has been reset.")
-        //   req.flash("success", "Your password has been reset.");
-          done(err);
+          console.log("Password has been reset.")
+          req.flash("success", "Your password has been reset.");
+          done(err, 'done');
         });
       }
     ], function(err) {
-      res.redirect("/");
+      res.redirect("/games");
     });
   });
 
