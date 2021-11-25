@@ -34,11 +34,18 @@ router.get("/games", isAdmin, async (_, res) => {
 });
 
 router.post('/games', isAdmin, async function (req, res) {
+    // if (
+    //     req.body.name  === undefined || req.body.name  === null ||
+    //     req.body.image === undefined || req.body.image === null ||
+    //     req.body.tags  === undefined || req.body.tags  === null || req.body.tags === []
+    // ) {
+    //     return res.status(400).render('bad-request');
+    // }
+
     if (
         req.body.name  === undefined || req.body.name  === null ||
-        req.body.image === undefined || req.body.image === null ||
-        req.body.tags  === undefined || req.body.tags  === null || req.body.tags === []
-    ) {
+        req.body.image === undefined || req.body.image === null
+        ) {
         return res.status(400).render('bad-request');
     }
     
@@ -54,6 +61,12 @@ router.post('/games', isAdmin, async function (req, res) {
     }
 
     const game = new GameModel(req.body);
+    
+    // If no tag was selected send error
+    if(!game.tags.length){
+        req.flash('error', 'Can not create a game without tags.')
+        return res.redirect('back')
+    }
 
     const [_, gameSaveError] = await handle(game.save());
 
