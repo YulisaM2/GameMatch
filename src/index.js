@@ -29,6 +29,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(mongoSanitize())
 
+app.locals.moment = require('moment');
+app.locals.moment.locale();
+
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
   resave: false,
