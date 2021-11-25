@@ -30,10 +30,10 @@
                             <input type="hidden" name="_id" value="<%= user._id %>" form="user-update-form-<%= userIndex %>">
                             <input type="hidden" name="deleted" value="false" form="user-update-form-<%= userIndex %>">
                             <td>
-                                <input type="text" name="username" value="<%= user.username %>" class="form-control" form="user-update-form-<%= userIndex %>" required>
+                                <input type="text" name="username" value="<%= user.username %>" class="form-control deleted" form="user-update-form-<%= userIndex %>" disabled>
                             </td>
                             <td>
-                                <input type="text" name="email" value="<%= user.email %>" class="form-control" form="user-update-form-<%= userIndex %>" required>
+                                <input type="text" name="email" value="<%= user.email %>" class="form-control" form="user-update-form-<%= userIndex %>" disabled>
                             </td>
                             <td>
                                 <div>
