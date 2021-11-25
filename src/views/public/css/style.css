@@ -250,3 +250,23 @@ table.table-bordered > tbody > tr > td {
 .error {
     font-size: 60px;
 }
+
+.alert {
+    margin-top: 5px;
+}
+
+.alert-danger {
+    background-color: rgba(117, 12, 12, 0.685);
+    border-color: rgb(82, 7, 7);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.alert-success {
+    background-color: rgba(21, 97, 21, 0.685);
+    border-color: rgb(10, 70, 10);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.close:hover {
+    color: white;
+}
