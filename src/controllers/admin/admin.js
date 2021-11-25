@@ -84,7 +84,6 @@ router.put('/games/:gameID', isAdmin, async function (req, res) {
         console.log(existenError);
         return res.status(500).render('server-error');
     }
-    console.log(existentGame._id + " " + req.params._id)
     if(existentGame !== null && !existentGame._id.equals(req.params.gameID)){
         req.flash('error', 'A game with that name already exists.')
         return res.redirect('back')
@@ -207,6 +206,17 @@ router.post('/tags', isAdmin, async function (req, res) {
         return res.status(400).render('bad-request');
     }
 
+    // Check if it already exists
+    const [existentTag, existenError] =  await handle(TagModel.findOne({name: req.body.name}));
+    if (existenError) {
+        console.log(existenError);
+        return res.status(500).render('server-error');
+    }
+    if(existentTag !== null){
+        req.flash('error', 'A tag with that name already exists.')
+        return res.redirect('back')
+    }
+
     const tag = new TagModel(req.body);
 
     const [_, tagSaveError] = await handle(tag.save());
@@ -237,6 +247,16 @@ router.put('/tags/:tagID', isAdmin, async function (req, res) {
     }
 
     tag.name  = req.body.name;
+     // Check if it already exists
+     const [existentTag, existenError] =  await handle(TagModel.findOne({name: tag.name}));
+     if (existenError) {
+         console.log(existenError);
+         return res.status(500).render('server-error');
+     }
+     if(existentTag !== null){
+         req.flash('error', 'A tag with that name already exists.')
+         return res.redirect('back')
+     }
 
     [tag, tagError] = await handle(tag.save());
 
