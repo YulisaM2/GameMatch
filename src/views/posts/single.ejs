@@ -18,8 +18,11 @@
             <h1 class="pt-5 mb-0"><%= post.title %></h1>
             <small class="pb-4">Posted by <%= post.author.username %> <%= moment(post.createdAt).fromNow() %></small>
             <p class="mt-2 mb-4"><a class="gameLink" href="/games/<%= post.game._id %>"><%= post.game.name %></a> | Tags:
+                <% if(post.tags === undefined || post.tags.length == 0){ %>
+                    <span class="">None</span>
+                <% } %>
                 <% post.tags.forEach(tag => { %>
-                    <span class="tag py-1 px-2"><%=tag.name%></span>
+                    <span class="tag py-1 px-2"><%=tag.name %></span>
                 <% }); %></p>
             <p class="mt-1 pb-3"><%= post.description %></p>
         </div>

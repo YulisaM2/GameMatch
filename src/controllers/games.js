@@ -48,8 +48,7 @@ router.get('/:id', async (req, res) => {
         return;
     }
 
-    const [posts, postsError] = await handle(PostModel.find({ game: req.params.id }).populate('author').sort({ createdAt: 'desc' }).exec());
-
+    const [posts, postsError] = await handle(PostModel.find({ game: req.params.id }).populate(['tags', 'author']).sort({ createdAt: 'desc' }).exec());
     if (postsError || posts === null) {
         res.status(404).render('not-found');
 
