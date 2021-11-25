@@ -173,6 +173,9 @@
 
             document.getElementById(`tag-add-${gameIndex}`).onclick = event => {
                 event.preventDefault();
+                if(document.getElementById(`tag-select-${gameIndex}`).value.split(': ')[0] === ""){
+                    return
+                }
 
                 const selectedTag = {
                     _id: document.getElementById(`tag-select-${gameIndex}`).value.split(': ')[0],
@@ -218,7 +221,10 @@
 
         document.getElementById(`tag-add-new`).onclick = event => {
             event.preventDefault();
-
+            if(document.getElementById(`tag-select-new`).value.split(': ')[0] === ""){
+               return
+            }
+           
             const selectedTag = {
                 _id: document.getElementById(`tag-select-new`).value.split(': ')[0],
                 name: document.getElementById(`tag-select-new`).value.split(': ')[1],
