@@ -246,3 +246,7 @@ table.table-bordered > tbody > tr > td {
     background-color: black;
     background-image: linear-gradient(#05174d, rgb(18, 18, 19));
 }
+
+.error {
+    font-size: 60px;
+}

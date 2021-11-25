@@ -1,1 +1,23 @@
-500 Internal Server Error
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 Error | GameMatch</title>
+<%- include('./partials/header') %>
+    <div class="container text-center text-light mb-5">
+        <br class="my-4">
+        <h1 class="error">500 Internal Server Error</h1>
+        <p class="mb-0 pb-0">Sorry... it's not you, it's us.</p>
+        <p class="mt-0 pt-0">We'll try blowing on the server to see if it works.</p>
+        <br>
+        <a href="/">
+            <input type="image" src="/css/cartridge.png" alt="Image of a cartridge as a button to go back" name="saveForm" class="submit" id="saveForm" style="width: 360px; height: 270px;"/>
+        </a>
+        <div class="font-weight-light mb-5">
+            <small>Hint: Try the cartridge yourself :)</small>
+        </div>
+    </div>
+    <br class="my-2">
+<%- include('./partials/footer') %>
