@@ -39,13 +39,14 @@ router.post('/', isLoggedIn, async function (req, res) {
         return res.status(400).render('bad-request');
     }
 
+    req.flash('success', 'Comment added successfully.')
     res.redirect(`/games/${req.params.gameID}/posts/${req.params.postID}`)
 });
 
 router.delete('/:commentID', isLoggedIn, isCommentAuthorOrAdmin, async function (req, res){
     const { commentID } = req.params;
     await CommentModel.findByIdAndDelete(commentID);
-    // req.flash('success', 'Successfully deleted comment');
+    req.flash('success', 'Comment deleted successfully.');
     res.redirect(`/games/${req.params.gameID}/posts/${req.params.postID}`)
 });
 
