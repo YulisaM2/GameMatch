@@ -60,7 +60,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/:id/create', isLoggedIn, async (req, res) =>{
 
-    const [game, gameError] = await handle(GameModel.findOne({ _id: req.params.id, deleted: false }).populate('tags').exec());
+    const [game, gameError] = await handle(GameModel.findOne({ _id: req.params.id, deleted: false }).populate({path: 'tags', options: { sort: { 'name': 'asc' } }}).exec());
 
     if (gameError || game === null) {
         res.render('not-found');

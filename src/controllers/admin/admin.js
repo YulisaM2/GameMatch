@@ -22,7 +22,7 @@ router.get("/games", isAdmin, async (_, res) => {
         return res.status(500).render('server-error');
     }
 
-    const [tags, tagsError] = await handle(TagModel.find());
+    const [tags, tagsError] = await handle(TagModel.find().sort({ name: 'asc' }));
 
     if (tagsError) {
         console.log(tagsError);
