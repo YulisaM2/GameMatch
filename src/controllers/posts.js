@@ -10,7 +10,7 @@ const PostModel = require('../models/post');
 var router = express.Router({ mergeParams: true });
 
 router.get('/:postID', async (req, res) => {
-    let [post, error] = await handle(PostModel.findOne({_id: req.params.postID}).populate(['game', 'tags', 'author']).populate({path: 'comments', populate: {path: 'author'}}).exec());
+    let [post, error] = await handle(PostModel.findOne({_id: req.params.postID}).populate(['game', 'tags', 'author']).populate({path: 'comments', populate: {path: 'author'}, options: { sort: { 'createdAt': 'desc' } }}).exec());
 
     if (error || post === null) {
         res.status(404).render('not-found');
