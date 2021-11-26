@@ -5,8 +5,7 @@ var router = express.Router()
 
 router.get('/', function (req, res) {  
     if(!req.isAuthenticated()){
-        //res.sendFile("/Users/jchv99/Desktop/test/GameMatch/src/views/home/joel.html") 
-        res.render('home/landing-page')
+        res.render('home/landing-page', {page: 'landing'})
     }else{
         res.redirect('/games')
     }

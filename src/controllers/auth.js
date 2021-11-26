@@ -15,7 +15,7 @@ router.get('/register', (req, res) => {
         req.flash('error', 'To register a new account, log out first')
         return res.redirect('/games')
     }
-    res.render('./auth/register')
+    res.render('./auth/register', {page: 'register'})
 })
 
 router.post('/register', async(req, res) => {
@@ -53,7 +53,7 @@ router.get('/login',  (req, res) => {
         req.flash('error', 'You are already logged in, if you want to log in with a new account first log out')
         return res.redirect('/games')
     }
-    res.render('./auth/login')
+    res.render('./auth/login', {page: 'login'})
 })
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {

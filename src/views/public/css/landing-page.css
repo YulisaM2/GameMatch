@@ -162,3 +162,71 @@ body {
 .new {
   background-color: #042383;
 }
+
+@media (max-width: 978px) and (min-width: 755px){
+  #video-play
+  {
+    min-height: 330px;
+  }
+  #home-heading
+  {
+    min-height: 270px;
+  }
+}
+
+
+@media (max-width: 755px) and (min-width: 748px){
+  #video-play
+  {
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 748px) and (min-width: 528px) {
+  #video-play
+  {
+    min-height: 380px;
+  }
+  #home-heading
+  {
+    min-height: 270px;
+  }
+}
+
+@media (max-width: 528px) and (min-width: 515px){
+  #video-play
+  {
+    min-height: 400px;
+  }
+}
+@media (max-width: 515px) and (min-width: 496px) {
+  #video-play
+  {
+    min-height: 410px;
+  }
+}
+
+@media (max-width: 496px) and (min-width: 450px){
+  #video-play
+  {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 450px){
+  #video-play
+  {
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 528px) {
+  /* #video-play
+  {
+    min-height: 450px;
+  } */
+  #home-heading
+  {
+    min-height: 320px;
+  }
+}

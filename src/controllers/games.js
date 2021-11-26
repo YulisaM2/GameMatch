@@ -23,7 +23,7 @@ router.get("/", async function (req, res){
             req.flash('error', 'No game title matched, please try again!')
             res.redirect('back');
         }else{
-            res.render('games/list', {games, user: isLoggedIn, searched_title: req.query.search});
+            res.render('games/list', {games, user: isLoggedIn, searched_title: req.query.search, page: 'games'});
         }
 
 	}else{
@@ -34,7 +34,7 @@ router.get("/", async function (req, res){
             return;
         }
 
-        res.render('games/list', {games, user: isLoggedIn, searched_title: undefined});
+        res.render('games/list', {games, user: isLoggedIn, searched_title: undefined, page: 'games'});
 
 	}
 });

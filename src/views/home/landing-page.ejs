@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <nav class="navbar navbar-expand-sm navbar-custom navbar-dark sticky-top">
         <a class="navbar-brand" href="/"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                 fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
                 <path
@@ -29,23 +29,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item <%= typeof page !== 'undefined' && page === 'games' ? 'active' : '' %>">
                     <a class="nav-link" href="/games">Games<span class="sr-only">(current)</span></a>
                 </li>
-                <% if (current_user && current_user.isAdmin) { %>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin">Dashboard<span class="sr-only"></span></a>
-                    </li>
-                <% } %>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <% if(!current_user){ %>
                     <li class="nav-item  <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a class="nav-link" href="/login">Login</a></li>
                     <li class="nav-item <%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a class="nav-link" href="/register">Register</a></li>
-               <% }else{ %>
-                    <li class="nav-item"><a href="#" class="nav-link text-right">Signed in as <%= current_user.username %><a></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-                <% } %>
             </ul>
         </div>
     </nav>
@@ -63,7 +53,7 @@
       <div class="carousel-inner">
         <div class="carousel-item carousel-image-1 active">
           <div class="container">
-            <div class="carousel-caption d-none d-sm-block mb-5">
+            <div class="carousel-caption d-sm-block mb-5">
               <h1 class="display-3">Need an ADC?</h1>
               <p class="lead">Get into our LoL discussion and team up with some buddies.</p>
             </div>
@@ -72,7 +62,7 @@
 
         <div class="carousel-item carousel-image-2">
           <div class="container">
-            <div class="carousel-caption d-none d-sm-block mb-5">
+            <div class="carousel-caption d-sm-block mb-5">
               <h1 class="display-3">No luck in public games?</h1>
               <p class="lead">Join our discussion board to get the best tips for your CSGO abilities.</p>
             </div>
@@ -81,7 +71,7 @@
 
         <div class="carousel-item carousel-image-3">
           <div class="container">
-            <div class="carousel-caption d-none d-sm-block mb-5">
+            <div class="carousel-caption d-sm-block mb-5">
               <h1 class="display-3">Looking for a W?</h1>
               <p class="lead">Get a team now and go get that W you all deserve.</p>
             </div>
@@ -114,19 +104,21 @@
     </div>
   </section>
 
-    <section id="video-play" class="py-xl-5">
-      <div class="dark-overlay">
-        <div class="row">
-          <div class="col">
-            <div class="container pt-5">
-              <h1>New here? Don't worry!</h1>
-              <em>
-                Picture Tinder but for gamers.
-              </em>
-              <p></p>
-              <p>
-                There are a lot of collaborative or versus video games out there, but now with the pandemic, meeting new people to organize your own team might be harder. The idea is that users can search the game they want to play and then see other people’s profiles with information such as tag, badges, role, gameplay style and more. If the user thinks one of the candidates could be helpful to their team/campaign, they can send a message to notify the other person of their interest.
-              </p>
+    <section id="video-play">
+      <div class="container-fluid">
+        <div class="dark-overlay">
+          <div class="row">
+            <div class="col">
+              <div class="container pt-5">
+                <h1>New here? Don't worry!</h1>
+                <em>
+                  Picture Tinder but for gamers.
+                </em>
+                <p></p>
+                <p>
+                  There are a lot of collaborative or versus video games out there, but now with the pandemic, meeting new people to organize your own team might be harder. The idea is that users can search the game they want to play and then see other people’s profiles with information such as tag, badges, role, gameplay style and more. If the user thinks one of the candidates could be helpful to their team/campaign, they can send a message to notify the other person of their interest.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -135,13 +127,15 @@
 
   <!-- HOME HEADING SECTION -->
   <section id="home-heading">
-    <div class="light-overlay">
-      <div class="row">
-        <div class="col">
-          <div class="container pt-5">
-            <h1>Are you ready to get started?</h1>
-            <p class="d-none d-md-block">Sign in to get access to every post and connect with your perfect team or to find your perfect rival.</p>
-            <a href="/register"><input class="btn btn-primary" type=button value='Register now!'></a>
+    <div class="container-fluid">
+      <div class="light-overlay">
+        <div class="row">
+          <div class="col">
+            <div class="container pt-5">
+              <h1>Are you ready to get started?</h1>
+              <p class="d-md-block">Sign in to get access to every post and connect with your perfect team or to find your perfect rival.</p>
+              <a href="/register"><input class="btn btn-primary" type=button value='Register now!'></a>
+            </div>
           </div>
         </div>
       </div>

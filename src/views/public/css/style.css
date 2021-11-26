@@ -270,3 +270,10 @@ table.table-bordered > tbody > tr > td {
 .close:hover {
     color: white;
 }
+
+@media (max-width: 576px) {
+    .nav-username
+    {
+        display: none;
+    }
+}
