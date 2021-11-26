@@ -19,7 +19,7 @@
                     <% } %>
                 </span>
                 <br>
-                <h1 class="pt-5 mb-0 text-center"><%= post.title %></h1> 
+                <h1 class="pt-5 mb-0 text-center" style="overflow-wrap: break-word;"><%= post.title %></h1> 
                 <small class="pb-4"><%= moment(post.createdAt).fromNow() %> by <span class="author font-weight-bold"><%= post.author.username %></span></small>
                 <p class="mt-2 mb-4"><a class="gameLink" href="/games/<%= post.game._id %>"><%= post.game.name %></a> | Tags:
                     <% if(post.tags === undefined || post.tags.length == 0){ %>
