@@ -10,7 +10,7 @@ const { isAdmin } = require('../../middleware');
 var router = express.Router();
 
 router.get("/", isAdmin, async (_, res) => {
-    res.render('admin/admin');
+    res.render('admin/admin', {page: 'admin'});
 });
 
 router.get("/games", isAdmin, async (_, res) => {
