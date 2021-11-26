@@ -1,4 +1,6 @@
-require('dotenv').config()
+if(process.env.NODE_ENV !== 'prod'){
+  require('dotenv').config()
+}
 
 const express  = require('express')
 const session = require('express-session')
@@ -71,8 +73,9 @@ app.use('/admin', admin)
 app.use(express.static('src/views/public'))
 app.use(methodOverride('_method'))
 
-
+// const dbUrl = process.env.DB_URL
 mongoose.connect("mongodb://localhost/gameMatch", {
+// mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 })
