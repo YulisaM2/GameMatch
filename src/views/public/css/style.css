@@ -233,31 +233,6 @@ table.table-bordered > tbody > tr > td {
     height: 350px;
 }
 
-.gameInfo {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.gameInfo-left {
-    flex: 0 1 0;
-}
-
-.gameInfo-right {
-    flex: 0 0 100%;
-}
-
-@media (min-width: 768px) {
-    .gameInfo {
-        flex-wrap: nowrap;
-    }
-
-    .gameInfo-right {
-        flex: 0 1 auto;
-        max-width: 450px;
-    }
-}
-
-
 .game-name {
     color: white;
 }
