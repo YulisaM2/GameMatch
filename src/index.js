@@ -1,6 +1,4 @@
-if(process.env.NODE_ENV !== 'prod'){
-  require('dotenv').config()
-}
+require('dotenv').config()
 
 const express  = require('express')
 const session = require('express-session')
@@ -37,8 +35,9 @@ app.use(mongoSanitize())
 app.locals.moment = require('moment');
 app.locals.moment.locale();
 
+const secret = process.env.SESSION_SECRET || 'jSU#455@s4df]aDL34@K$^Sm!'
 const sessionConfig = {
-  secret: process.env.SESSION_SECRET,
+  secret: secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -73,9 +72,8 @@ app.use('/admin', admin)
 app.use(express.static('src/views/public'))
 app.use(methodOverride('_method'))
 
-// const dbUrl = process.env.DB_URL
-mongoose.connect("mongodb://localhost/gameMatch", {
-// mongoose.connect(dbUrl, {
+const dbUrl = process.env.DB_URL || "mongodb://localhost/gameMatch"
+mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 })
