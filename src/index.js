@@ -8,6 +8,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const mongoSanitize = require('express-mongo-sanitize')
 const flash = require("connect-flash")
+const path = require('path');
 
 const User = require('./models/user')
 
@@ -23,7 +24,7 @@ const { noCache } = require('./middleware');
 const app = express()
 const port = process.env.PORT || 5000
 
-app.set('views', process.cwd() + '/src/views')
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
 
 app.use(flash());
