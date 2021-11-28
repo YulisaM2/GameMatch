@@ -6,12 +6,17 @@ body {
   color: #fff;
   font-weight: bold;
   text-shadow: 2px 2px 2px black;
-  
+  font-size: 3.5rem;
+}
+
+@media (min-width: 576px) {
+  .display-3{
+    font-size: 4.5rem;
+  }
 }
 
 .lead{
   color: #eee;
-  
 }
 
 .btn-primary {
