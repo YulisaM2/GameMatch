@@ -236,6 +236,19 @@ table.table-bordered > tbody > tr > td {
     height: calc(1.5em + .75rem + 2px);
 }
 
+.gameInfo {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gameInfo-left {
+    flex-basis: 0;
+}
+
+.gameInfo-right {
+    flex-basis: 656px;
+}
+
 .gameImg {
     width: 250px;
     height: 350px;
