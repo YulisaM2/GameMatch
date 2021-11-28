@@ -288,3 +288,13 @@ table.table-bordered > tbody > tr > td {
 .flex-grow-1 {
     flex-grow: 1;
 }
+
+.admin-table {
+    overflow-x: scroll;
+}
+
+@media (min-width: 769px) {
+    .admin-table {
+        overflow-x: auto;
+    }
+}
