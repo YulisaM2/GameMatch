@@ -12,7 +12,7 @@
             <img src="<%= game.image %>" alt="<%= game.name %> poster" class="gameImg mw-100 gameInfo-left">
             <div class="ml-lg-4 mt-4 align-self-end text-left gameInfo-right">
                 <span class="h1"><%= game.name %></span>
-                <div class="text-left mt-2 mb-4 d-inline-flex flex-wrap">
+                <div class="text-left mt-2 mb-4 d-flex flex-wrap">
                     <span class="my-1">Tags: </span>
                     <% game.tags.forEach(tag => { %>
                         <span class="tag py-1 px-2 mx-1 my-1"><%= tag.name %></span>
