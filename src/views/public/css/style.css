@@ -99,6 +99,7 @@ hr {
 input[type="text"]:disabled {
     background-color: transparent;
     border-color: transparent;
+    padding: 0;
 }
 
 .navbar-custom {
