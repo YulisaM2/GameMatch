@@ -1,14 +1,21 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100vh;
 }
 
 body {
     margin: 0;
     background: rgb(18, 18, 19);
     height: 100%;
-    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .container {
@@ -276,4 +283,8 @@ table.table-bordered > tbody > tr > td {
     {
         display: none;
     }
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
 }
