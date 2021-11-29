@@ -3,9 +3,9 @@ const path = require('path')
 
 var router = express.Router()
 
-router.get('/', function (req, res) {   
+router.get('/', function (req, res) {  
     if(!req.isAuthenticated()){
-        res.send("INSERT LANDING PAGE")
+        res.render('home/landing-page', {page: 'landing'})
     }else{
         res.redirect('/games')
     }

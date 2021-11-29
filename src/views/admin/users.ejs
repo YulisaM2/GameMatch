@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Manage Users | GameMatch</title>
+<%- include('../partials/header') %>
+    <div class="container my-5 flex-grow-1 admin-table">
+        <h1 class="text-light text-center mb-4">Manage Users</h1>
+        <table class="table table-bordered">
+            <thead class="thead text-center">
+                <tr>
+                    <th style="width: 30%; min-width: 150px;">Username</th>
+                    <th style="width: 30%; min-width: 150px;">Email</th>
+                    <th style="width: 14%">isAdmin</th>
+                    <th style="width: 13%">Save</th>
+                    <th style="width: 13%">Delete</th>
+                </tr>
+            </thead>
+            <tbody class="text-light">
+                <% users.forEach((user, userIndex) => { %>
+                    <form id="user-update-form-<%= userIndex %>" action="/admin/users/<%= user._id %>?_method=PUT" method="POST"></form>
+                    <% if (!user.deleted) { %>
+                        <tr>
+                    <% } else { %>
+                        <tr class="deleted-row">
+                    <% } %>
+                            <input type="hidden" name="_id" value="<%= user._id %>" form="user-update-form-<%= userIndex %>">
+                            <input type="hidden" name="deleted" value="false" form="user-update-form-<%= userIndex %>">
+                            <td>
+                                <input type="hidden" name="username" value="<%= user.username %>" form="user-update-form-<%= userIndex %>">
+                                <input type="text" name="username" value="<%= user.username %>" class="form-control deleted" form="user-update-form-<%= userIndex %>" disabled>
+                            </td>
+                            <td>
+                                <input type="hidden" name="email" value="<%= user.email %>" form="user-update-form-<%= userIndex %>">
+                                <input type="text" name="email" value="<%= user.email %>" class="form-control" form="user-update-form-<%= userIndex %>" disabled>
+                            </td>
+                            <td>
+                                <div>
+                                    <input id="isAdmin-true" type="radio" name="isAdmin" value="true" form="user-update-form-<%= userIndex %>" required <%= (() => { if (user.isAdmin) { return "checked"; } })() %>>
+                                    <label for="isAdmin-true">True</label>
+                                </div>
+                                <div>
+                                    <input id="isAdmin-false" type="radio" name="isAdmin" value="false" form="user-update-form-<%= userIndex %>" required <%= (() => { if (!user.isAdmin) { return "checked"; } })() %>>
+                                    <label for="isAdmin-false">False</label>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary" form="user-update-form-<%= userIndex %>">Save</button>
+                            </td>
+                            <td>
+                                <% if (!user.deleted) { %>
+                                    <form id="user-delete-<%= userIndex %>" action="/admin/users/<%= user._id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-danger red" form="user-delete-<%= userIndex %>">Delete</button>
+                                    </form>
+                                <% } else { %>
+                                    <form id="user-republish-<%= userIndex %>" action="/admin/users/<%= user._id %>?_method=PUT" method="POST">
+                                        <input type="hidden" name="_id" value="<%= user._id %>">
+                                        <input type="hidden" name="username" value="<%= user.username %>">
+                                        <input type="hidden" name="email" value="<%= user.email %>">
+                                        <input type="hidden" name="isAdmin" value="<%= user.isAdmin %>">
+                                        <input type="hidden" name="deleted" value="false">
+                                        <button type="submit" class="btn btn-success green" form="user-republish-<%= userIndex %>">Republish</button>
+                                    </form>
+                                <% } %>
+                            </td>
+                        </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+<%- include('../partials/footer') %>

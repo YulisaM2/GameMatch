@@ -1,0 +1,223 @@
+body {
+  overflow-x: hidden;
+}
+
+.display-3{
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px black;
+  font-size: 3.5rem;
+}
+
+@media (min-width: 576px) {
+  .display-3{
+    font-size: 4.5rem;
+  }
+}
+
+.lead{
+  color: #eee;
+}
+
+.btn-primary {
+  border: none;
+  outline: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 200px;
+  background-color: #042383;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.btn-primary:hover {
+  background-color: #041c66;
+  color: white;
+}
+
+.navbar-custom {
+  background-color: #042383;
+  box-shadow: 1px 6px 3px -1px rgba(0,0,0,0.35);
+}
+
+.navbar-brand, .nav-link {
+  color: white;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+  color: rgb(231, 237, 253);
+}
+
+.carousel-item {
+  height: 500px;
+  box-shadow: rgb(0, 0, 0);
+  text-shadow: rgb(0, 0, 0);
+
+}
+
+.carousel-image-1 {
+  background: url('/css/LoL1.jpeg');
+  background-size: cover;
+  
+}
+
+.carousel-image-2 {
+  background: url('/css/CSGO1.jpeg');
+  background-size: cover;
+}
+
+.carousel-image-3 {
+  background: url('/css/CoD1.jpeg');
+  background-size: cover;
+}
+
+#home-heading {
+  position: relative;
+  min-height: 250px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #fff;
+  padding: 50px 10px 50px 10px;
+}
+
+.light-overlay {
+  background: rgb(18, 18, 19);
+}
+
+.dark-overlay {
+  background: rgb(35, 26, 83);
+  color: white;
+}
+
+#home-icons{
+  background-color: rgb(18, 18, 19);
+  color: #fff;
+  min-height: 150px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 50px 10px 50px 10px;
+}
+
+#video-play {
+  min-height: 300px;
+  text-align: center;
+  color: #fff;
+  padding: 50px 10px 50px 10px;
+}
+
+.container{
+  height: auto;
+}
+
+.container-fluid{
+  height: auto;
+}
+
+#video-play a {
+  color: #fff;
+}
+
+#page-header {
+  height: 200px;
+  background: url('../img/image1.jpg');
+  background-position: 0 -360px;
+  background-attachment: fixed;
+  color: #fff;
+  border-bottom: 1px #eee solid;
+  padding-top: 50px;
+}
+
+.about-img {
+  margin-top: -50px;
+}
+
+#faq .card {
+  border: #444;
+}
+
+#faq a {
+  text-decoration: none;
+}
+
+#faq .card-body,
+#faq .card-header {
+  background: #333;
+}
+
+#main-footer {
+  background: #010f34;
+  color: #fff;
+}
+
+.new {
+  background-color: #042383;
+}
+
+@media (max-width: 978px) and (min-width: 755px){
+  #video-play
+  {
+    min-height: 330px;
+  }
+  #home-heading
+  {
+    min-height: 270px;
+  }
+}
+
+
+@media (max-width: 755px) and (min-width: 748px){
+  #video-play
+  {
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 748px) and (min-width: 528px) {
+  #video-play
+  {
+    min-height: 380px;
+  }
+  #home-heading
+  {
+    min-height: 270px;
+  }
+}
+
+@media (max-width: 528px) and (min-width: 515px){
+  #video-play
+  {
+    min-height: 400px;
+  }
+}
+@media (max-width: 515px) and (min-width: 496px) {
+  #video-play
+  {
+    min-height: 410px;
+  }
+}
+
+@media (max-width: 496px) and (min-width: 450px){
+  #video-play
+  {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 450px){
+  #video-play
+  {
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 528px) {
+  /* #video-play
+  {
+    min-height: 450px;
+  } */
+  #home-heading
+  {
+    min-height: 320px;
+  }
+}

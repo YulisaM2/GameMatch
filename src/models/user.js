@@ -15,6 +15,14 @@ var user_Schema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    deleted: {
+        type: Boolean,
+        default: false,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     resetPasswordToken: String,
     resetPasswordExpires: Date
 });

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Reset password | GameMatch</title>
+<%- include('../partials/header') %>
+    <section class="form my-5 mx-5 flex-grow-1">
+        <div class="container text-light">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <img src="/css/loginImage.jpg" class="loginImg img-fluid" alt="Image of two videogame controllers.">
+                </div>
+                <div class="col-lg-7 px-5 pt-5">
+                    <h1 class="font-weight-bold py-3">GameMatch</h1>
+                    <h4>Enter new password</h4>
+                    <form action='/forgot/<%= token %>' method='POST'>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="password" placeholder="New password" class="form-control my-2 p-4" name="password" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-7">
+                                <input type="password" placeholder="Confirm password" class="form-control my-2 p-4" name="confirm" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-lg-7">
+                                <button class="btn1 mt-3 mb-5">Change password</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<%- include('../partials/footer') %>

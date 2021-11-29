@@ -1,28 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Games | GameMatch</title>
-
-    <link rel="stylesheet" href="/css/games/list.css">
-</head>
-<body>
-    <h1>List of all games</h1>
-    <form action="/games" action="GET" class="form-inline">
-        <div class="form-group">
-            <input type="text" name="search" placeholder="Search game..." class="form-control">
-            <input type="submit" value="Search" class="btn btn-default">
-        </div>	
-    </form>
-    <div class="games">
-        <% games.forEach(game => { %>
-            <div class="game">
-                <img src="<%= game.image %>" alt="<%= game.name %> poster">
-                <h2><a href="/games/<%= game._id %>"><%= game.name %></a></h2>
+<%- include('../partials/header') %>
+    <div class="container my-5 flex-grow-1">
+        <h1 class="text-center text-light mb-4">List of all games</h1>
+        <% if (searched_title){ %>
+            <div class="d-flex mb-4">
+                <form action="/games" action="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" value="<%= searched_title %>" class="form-control searchbar" required>
+                        <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
+                    </div>	
+                </form>
+                <button onclick="location.href = '/games';" class="btn1 btn-default searchbtn red ml-1">Clear</button>
             </div>
-        <% }); %>
+        <% }else{ %>
+            <div class="d-flex">
+                <form action="/games" action="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Search game title..." class="form-control searchbar" required>
+                        <input type="submit" value="Search" class="btn1 btn-default searchbtn ml-1">
+                    </div>	
+                </form>
+            </div>
+        <% } %>
+        <div class="row d-flex games no-border text-center my-4 py-3 px-2">
+            <% games.forEach(game => { %>
+                <div class="col mt-3">
+                    <a href="/games/<%= game._id %>"><input type="image" src="<%= game.image %>" alt="<%= game.name %> poster" name="saveForm" class="gameImg submit" id="saveForm" style="--bs-aspect-ratio: 180%;"/></a>
+                    <h2 class="pt-2"><a class="game-name" href="/games/<%= game._id %>"><%= game.name %></a></h2>
+                </div>
+            <% }); %>
+        </div>
     </div>
-</body>
-</html>
+<%- include('../partials/footer') %>
