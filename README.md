@@ -13,3 +13,5 @@ npm install
 ```
 npm start
 ```
+
+_**Note: Remember to have you .env with the corresponding keys for it to work_
